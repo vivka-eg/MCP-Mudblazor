@@ -1,0 +1,327 @@
+@page "/property"
+
+<!-- Scoped wrapper for isolation from existing MudBlazor styles -->
+<div class="eg-dashboard-scope">
+    <MudContainer MaxWidth="MaxWidth.False" Class="property-page-container">
+
+        <!-- Content Header -->
+        <div class="content-header">
+            <MudText Typo="Typo.h1" Class="page-title">Property</MudText>
+
+            <div class="header-actions">
+                <!-- My reports dropdown -->
+                <MudMenu>
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Outlined"
+                                   EndIcon="@Icons.Material.Filled.KeyboardArrowDown"
+                                   Class="btn-mud btn-dropdown-mud">
+                            My reports
+                        </MudButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem>Report 1</MudMenuItem>
+                        <MudMenuItem>Report 2</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+
+                <!-- New report button -->
+                <MudButton Variant="Variant.Outlined"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           Class="btn-mud btn-secondary-mud">
+                    New report
+                </MudButton>
+
+                <!-- Icon buttons -->
+                <MudIconButton Icon="@Icons.Material.Filled.ContentCopy"
+                               Variant="Variant.Outlined"
+                               Class="btn-icon-mud"
+                               Title="Copy" />
+
+                <MudIconButton Icon="@Icons.Material.Filled.FilterList"
+                               Variant="Variant.Outlined"
+                               Class="btn-icon-mud"
+                               Title="Filter" />
+
+                <MudIconButton Icon="@Icons.Material.Filled.MoreHoriz"
+                               Variant="Variant.Outlined"
+                               Class="btn-icon-mud"
+                               Title="More options" />
+
+                <div class="spacer"></div>
+
+                <!-- Add agent roles button -->
+                <MudButton Variant="Variant.Outlined"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           OnClick="@(() => _showAgentRolesDialog = true)"
+                           Class="btn-mud btn-secondary-mud">
+                    Add agent roles
+                </MudButton>
+
+                <!-- New row dropdown -->
+                <MudMenu>
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.Add"
+                                   Class="btn-mud btn-primary-mud">
+                            New row
+                        </MudButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Download">Import</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Upload">CSV Export</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Print">Print</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.PictureAsPdf">Create PDF</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Assessment">Area report</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+            </div>
+        </div>
+
+        <!-- Table Info -->
+        <div class="table-info">
+            Showing rows @(_currentPage * _pageSize + 1)-@(Math.Min((_currentPage + 1) * _pageSize, _properties.Count)) out of @_properties.Count
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-container">
+            <MudTable Items="@_pagedProperties"
+                      Hover="true"
+                      Striped="false"
+                      Dense="false"
+                      Elevation="0"
+                      Class="data-table-mud">
+                <HeaderContent>
+                    <MudTh Class="table-header-cell-mud">
+                        <MudCheckBox T="bool"
+                                     @bind-Value="@_selectAll"
+                                     Color="Color.Primary"
+                                     Class="table-checkbox-mud"
+                                     Dense="true" />
+                    </MudTh>
+                    <MudTh Class="table-header-cell-mud">Name</MudTh>
+                    <MudTh Class="table-header-cell-mud">Address</MudTh>
+                    <MudTh Class="table-header-cell-mud">Post code</MudTh>
+                    <MudTh Class="table-header-cell-mud">Type</MudTh>
+                    <MudTh Class="table-header-cell-mud">Status</MudTh>
+                    <MudTh Class="table-header-cell-mud">Last Updated</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Select" Class="table-cell-mud">
+                        <MudCheckBox T="bool"
+                                     @bind-Value="@context.Selected"
+                                     Color="Color.Primary"
+                                     Class="table-checkbox-mud"
+                                     Dense="true" />
+                    </MudTd>
+                    <MudTd DataLabel="Name" Class="table-cell-mud">@context.Name</MudTd>
+                    <MudTd DataLabel="Address" Class="table-cell-mud">@context.Address</MudTd>
+                    <MudTd DataLabel="Post Code" Class="table-cell-mud">@context.PostCode</MudTd>
+                    <MudTd DataLabel="Type" Class="table-cell-mud">@context.Type</MudTd>
+                    <MudTd DataLabel="Status" Class="table-cell-mud">
+                        @if (context.Status == "Active")
+                        {
+                            <MudChip T="string"
+                                     Size="Size.Small"
+                                     Color="Color.Success"
+                                     Class="badge-mud badge-success-mud">Active</MudChip>
+                        }
+                        else if (context.Status == "Inactive")
+                        {
+                            <MudChip T="string"
+                                     Size="Size.Small"
+                                     Color="Color.Default"
+                                     Class="badge-mud badge-neutral-mud">Inactive</MudChip>
+                        }
+                        else if (context.Status == "Expired")
+                        {
+                            <MudChip T="string"
+                                     Size="Size.Small"
+                                     Color="Color.Error"
+                                     Class="badge-mud badge-error-mud">Expired</MudChip>
+                        }
+                    </MudTd>
+                    <MudTd DataLabel="Last Updated" Class="table-cell-mud">@context.LastUpdated</MudTd>
+                </RowTemplate>
+            </MudTable>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <div class="rows-per-page">
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="pagination-label">
+                    Rows per page
+                </MudText>
+                <MudSelect T="int"
+                           @bind-Value="_pageSize"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           Class="page-select-mud">
+                    <MudSelectItem Value="12">12</MudSelectItem>
+                    <MudSelectItem Value="24">24</MudSelectItem>
+                    <MudSelectItem Value="50">50</MudSelectItem>
+                    <MudSelectItem Value="100">100</MudSelectItem>
+                </MudSelect>
+            </div>
+
+            <div class="pagination-controls">
+                <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft"
+                               OnClick="@PreviousPage"
+                               Disabled="@(_currentPage == 0)"
+                               Class="pagination-btn-mud" />
+
+                <div class="page-info">
+                    <MudNumericField @bind-Value="_displayPage"
+                                     Variant="Variant.Outlined"
+                                     Margin="Margin.Dense"
+                                     Min="1"
+                                     Max="@_totalPages"
+                                     Class="page-input-mud"
+                                     HideSpinButtons="true" />
+                    <MudText Typo="Typo.body2" Color="Color.Secondary">
+                        of @_totalPages pages
+                    </MudText>
+                </div>
+
+                <MudIconButton Icon="@Icons.Material.Filled.ChevronRight"
+                               OnClick="@NextPage"
+                               Disabled="@(_currentPage >= _totalPages - 1)"
+                               Class="pagination-btn-mud" />
+            </div>
+        </div>
+
+    </MudContainer>
+</div>
+
+<!-- Agent Roles Dialog -->
+<MudDialog @bind-Visible="_showAgentRolesDialog" Options="_dialogOptions" Class="modal-mud">
+    <TitleContent>
+        <div class="modal-header-content">
+            <div>
+                <MudText Typo="Typo.h6" Class="modal-title-mud">Add Agent Roles</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="modal-subtitle-mud">
+                    This will set agents and respective roles for selected facilities
+                </MudText>
+            </div>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <div class="modal-body-mud">
+            <MudSelect T="string"
+                       Label="Agent"
+                       Variant="Variant.Outlined"
+                       Margin="Margin.Normal"
+                       FullWidth="true"
+                       Class="form-select-mud">
+                <MudSelectItem Value="@("")"></MudSelectItem>
+                <MudSelectItem Value="@("Agent 1")">Agent 1</MudSelectItem>
+                <MudSelectItem Value="@("Agent 2")">Agent 2</MudSelectItem>
+            </MudSelect>
+
+            <MudSelect T="string"
+                       Label="Role"
+                       Variant="Variant.Outlined"
+                       Margin="Margin.Normal"
+                       FullWidth="true"
+                       Class="form-select-mud">
+                <MudSelectItem Value="@("")"></MudSelectItem>
+                <MudSelectItem Value="@("Manager")">Manager</MudSelectItem>
+                <MudSelectItem Value="@("Supervisor")">Supervisor</MudSelectItem>
+            </MudSelect>
+
+            <MudTextField T="string"
+                          Label="Comment"
+                          Variant="Variant.Outlined"
+                          Lines="4"
+                          Margin="Margin.Normal"
+                          FullWidth="true"
+                          Placeholder="Placeholder"
+                          Class="form-textarea-mud" />
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <div class="modal-footer-mud">
+            <MudButton OnClick="@(() => _showAgentRolesDialog = false)"
+                       Variant="Variant.Text"
+                       Class="btn-mud btn-ghost-mud">
+                Discard
+            </MudButton>
+            <MudButton OnClick="@SaveAgentRoles"
+                       Color="Color.Primary"
+                       Variant="Variant.Filled"
+                       Class="btn-mud btn-primary-mud">
+                Save
+            </MudButton>
+        </div>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    private bool _showAgentRolesDialog = false;
+    private bool _selectAll = false;
+    private int _pageSize = 12;
+    private int _currentPage = 0;
+    private int _displayPage = 1;
+
+    private DialogOptions _dialogOptions = new DialogOptions
+    {
+        MaxWidth = MaxWidth.Small,
+        FullWidth = true,
+        CloseButton = true
+    };
+
+    private List<PropertyModel> _properties = new();
+    private IEnumerable<PropertyModel> _pagedProperties => _properties.Skip(_currentPage * _pageSize).Take(_pageSize);
+    private int _totalPages => (int)Math.Ceiling(_properties.Count / (double)_pageSize);
+
+    protected override void OnInitialized()
+    {
+        // Sample data from dashboard.html
+        _properties = new List<PropertyModel>
+        {
+            new PropertyModel { Name = "CleanPilot Integration", Address = "123 Main Street", PostCode = "1234", Type = "Commercial", Status = "Active", LastUpdated = "00/00/0000" },
+            new PropertyModel { Name = "CleanPilot Integration II", Address = "456 Oak Avenue", PostCode = "5678", Type = "Residential", Status = "Inactive", LastUpdated = "00/00/0000" },
+            new PropertyModel { Name = "Dynamic_Year_Testing", Address = "789 Pine Road", PostCode = "9012", Type = "Industrial", Status = "Active", LastUpdated = "00/00/0000" },
+            new PropertyModel { Name = "testing_dynamic", Address = "321 Elm Street", PostCode = "3456", Type = "Commercial", Status = "Expired", LastUpdated = "00/00/0000" },
+            new PropertyModel { Name = "Testing_prop", Address = "654 Maple Drive", PostCode = "7890", Type = "Residential", Status = "Active", LastUpdated = "00/00/0000" },
+            new PropertyModel { Name = "Lysaker Torg 4", Address = "Lysaker Torg 4", PostCode = "1366", Type = "Office", Status = "Inactive", LastUpdated = "00/00/0000" },
+            new PropertyModel { Name = "Lysaker Torg 6", Address = "Lysaker Torg 6", PostCode = "1366", Type = "Office", Status = "Active", LastUpdated = "00/00/0000" },
+            new PropertyModel { Name = "Lysaker Torg 10", Address = "Lysaker Torg 10", PostCode = "1366", Type = "Office", Status = "Expired", LastUpdated = "00/00/0000" },
+        };
+    }
+
+    private void NextPage()
+    {
+        if (_currentPage < _totalPages - 1)
+        {
+            _currentPage++;
+            _displayPage = _currentPage + 1;
+        }
+    }
+
+    private void PreviousPage()
+    {
+        if (_currentPage > 0)
+        {
+            _currentPage--;
+            _displayPage = _currentPage + 1;
+        }
+    }
+
+    private void SaveAgentRoles()
+    {
+        _showAgentRolesDialog = false;
+        // Add save logic here
+    }
+
+    public class PropertyModel
+    {
+        public bool Selected { get; set; }
+        public string Name { get; set; } = "";
+        public string Address { get; set; } = "";
+        public string PostCode { get; set; } = "";
+        public string Type { get; set; } = "";
+        public string Status { get; set; } = "";
+        public string LastUpdated { get; set; } = "";
+    }
+}

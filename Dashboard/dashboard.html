@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property - EG Facilit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../_tokens.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay"></div>
+
+    <!-- Add Agent Roles Modal -->
+    <div class="modal-overlay" id="agentRolesModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div>
+                    <h2 class="modal-title">Add Agent Roles</h2>
+                    <p class="modal-subtitle">This will set agents and respective roles for selected facilities</p>
+                </div>
+                <button class="modal-close" aria-label="Close modal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Agent</label>
+                    <select class="form-select">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Role</label>
+                    <select class="form-select">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Comment</label>
+                    <textarea class="form-textarea" placeholder="Placeholder" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost modal-discard">Discard</button>
+                <button class="btn btn-primary modal-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Navigation Drawer -->
+        <aside class="left-nav">
+            <!-- Header -->
+            <div class="nav-header">
+                <div class="nav-header-content">
+                    <svg class="nav-logo" width="223" height="44" viewBox="0 0 223 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="EG Brandsync">
+                        <g clip-path="url(#clip0)">
+                            <path d="M18.6037 21.5067L21.5067 18.6037C21.7748 18.3356 22.2097 18.3356 22.4795 18.6037L25.3962 21.5205C25.6644 21.7886 25.6644 22.2251 25.3962 22.4933L22.4933 25.3962C22.2251 25.6644 21.7886 25.6644 21.5205 25.3962L18.6037 22.4795C18.3356 22.2114 18.3356 21.7748 18.6037 21.5067Z" fill="#57B1FF"/>
+                            <path d="M15.6423 12.6586L6.79249 21.5084C6.52437 21.7766 6.52437 22.2114 6.79249 22.4813L9.82781 25.5166C10.0959 25.7847 10.5308 25.7847 10.8006 25.5166L19.6505 16.6667C19.9186 16.3986 19.9186 15.962 19.6505 15.6939L16.6151 12.6586C16.347 12.3905 15.9105 12.3905 15.6423 12.6586Z" fill="#57B1FF"/>
+                            <path d="M28.3559 31.3414L37.2161 22.4813C37.4842 22.2131 37.4842 21.7766 37.2161 21.5084L34.1808 18.4731C33.9127 18.205 33.4778 18.205 33.208 18.4731L24.3478 27.3333C24.0797 27.6014 24.0797 28.038 24.3478 28.3061L27.3831 31.3414C27.6513 31.6095 28.0878 31.6095 28.3559 31.3414Z" fill="#57B1FF"/>
+                            <path d="M28.3577 12.6586L37.2075 21.5084C37.4756 21.7766 37.4756 22.2114 37.2075 22.4813L34.1722 25.5166C33.9041 25.7847 33.4692 25.7847 33.1994 25.5166L24.3495 16.6667C24.0814 16.3986 24.0814 15.962 24.3495 15.6939L27.3848 12.6586C27.653 12.3905 28.0895 12.3905 28.3577 12.6586Z" fill="#1B85FF"/>
+                            <path d="M15.6441 31.3414L6.78392 22.4813C6.51579 22.2131 6.51579 21.7766 6.78392 21.5084L9.81923 18.4731C10.0874 18.205 10.5222 18.205 10.792 18.4731L19.6522 27.3333C19.9203 27.6014 19.9203 28.038 19.6522 28.3061L16.6169 31.3414C16.3488 31.6095 15.9122 31.6095 15.6441 31.3414Z" fill="#1B85FF"/>
+                            <g class="logo-text">
+                                <path d="M64.2331 30.6419C62.6072 30.6419 61.3645 30.2947 60.5378 29.6106C59.6991 28.9145 59.2728 27.7922 59.2728 26.2763V17.808C59.2728 16.2903 59.6991 15.168 60.5378 14.4736C61.3628 13.7895 62.6072 13.4424 64.2331 13.4424C68.1209 13.4424 69.4048 13.4819 70.3845 13.5747C70.5959 13.5799 70.7094 13.75 70.7472 13.8067C70.8211 13.9184 70.8589 14.037 70.8589 14.1574V15.2574C70.8589 15.4206 70.8091 15.553 70.7128 15.6492C70.62 15.742 70.4842 15.7953 70.3433 15.7953H64.2555C63.5491 15.7953 62.9991 15.8709 62.6175 16.0188C62.2858 16.1477 62.0778 16.323 61.9781 16.5533C61.8733 16.7974 61.8234 17.1978 61.8234 17.808V20.5906H69.9102C70.1078 20.5906 70.2677 20.6577 70.412 20.8038C70.5564 20.9481 70.6252 21.108 70.6252 21.3056V22.1409C70.6252 22.3386 70.5581 22.4984 70.412 22.6428C70.2677 22.7872 70.1078 22.8559 69.9102 22.8559H61.8234V26.2763C61.8234 26.8881 61.8716 27.2869 61.9781 27.5309C62.0761 27.7613 62.2858 27.9366 62.6175 28.0655C62.9819 28.2064 63.3772 28.2889 64.6422 28.2889H70.3433C70.4859 28.2889 70.6217 28.3422 70.7145 28.435C70.8108 28.5313 70.8606 28.6636 70.8606 28.8269V29.9492C70.8606 30.0695 70.8228 30.1881 70.7489 30.2999C70.7111 30.3566 70.5977 30.5267 70.3777 30.5319C69.6197 30.6024 68.09 30.6419 66.0773 30.6419H64.2348H64.2331Z" fill="currentColor"/>
+                                <path d="M86.1352 22.3541V29.6038C86.1352 30.0678 85.8842 30.1538 85.7777 30.1847C85.7227 30.2019 83.4814 30.6969 79.8445 30.6969C75.5184 30.6969 72.1823 28.227 72.1823 23.7944C72.1823 23.3819 72.1772 23.2306 72.1772 20.4944C72.1772 14.7417 76.627 13.4131 80.0937 13.4131C83.2184 13.4131 84.3219 13.6795 85.5009 13.8583C85.6127 13.8755 85.7141 13.9081 85.7983 13.9545C85.8619 13.9889 85.9169 14.0319 85.9633 14.08C86.0578 14.1797 86.1128 14.3103 86.1128 14.4633V15.5684C86.1128 15.6716 86.0802 15.9844 85.7055 16.0531C85.6591 16.0617 85.6058 16.0669 85.5473 16.0669C85.5473 16.0669 85.4562 16.0669 85.4305 16.0634C85.2156 16.0445 82.9297 15.7816 80.2931 15.7816C76.6391 15.7816 74.7398 17.3405 74.7398 20.6491V23.5503C74.7398 26.9672 76.9983 28.3559 79.9631 28.3559C82.2972 28.3559 83.5691 28.1308 83.5691 28.1308V23.9147H81.9878C81.6681 23.9147 81.2745 23.6809 81.2745 23.2856C81.2745 22.8903 81.2694 22.8714 81.2694 22.3558C81.2694 21.8402 81.6784 21.6374 81.9878 21.6374H85.4373C85.855 21.6374 86.1334 21.988 86.1334 22.3558" fill="currentColor"/>
+                            </g>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0">
+                                <rect width="222.992" height="44" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <button class="theme-toggle-btn" aria-label="Toggle theme">
+                        <i data-lucide="sun" class="theme-icon-light"></i>
+                        <i data-lucide="moon" class="theme-icon-dark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Menu Toggle -->
+            <div class="collapse-toggle" role="button" tabindex="0" aria-expanded="true">
+                <span class="menu-text">Main Menu</span>
+                <span class="chevron-container">
+                    <i data-lucide="chevron-left"></i>
+                </span>
+            </div>
+
+            <!-- Search -->
+            <div class="search-container">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search...">
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <!-- Facility Section -->
+                <div class="nav-section">
+                    <button class="nav-item nav-parent" title="Facility">
+                        <i data-lucide="building" class="nav-icon"></i>
+                        <span class="nav-label">Facility</span>
+                        <i data-lucide="chevron-down" class="expand-icon"></i>
+                    </button>
+                    <div class="nav-submenu">
+                        <a href="#" class="nav-item nav-child active" title="Property">Property</a>
+                        <a href="#" class="nav-item nav-child" title="Installation">Installation</a>
+                        <a href="#" class="nav-item nav-child" title="Site">Site</a>
+                        <a href="#" class="nav-item nav-child" title="Building">Building</a>
+                        <a href="#" class="nav-item nav-child" title="Room">Room</a>
+                        <a href="#" class="nav-item nav-child" title="Object">Object</a>
+                        <a href="#" class="nav-item nav-child" title="Sections">Sections</a>
+                        <a href="#" class="nav-item nav-child" title="Furnishing">Furnishing</a>
+                        <a href="#" class="nav-item nav-child" title="Inventory">Inventory</a>
+                    </div>
+                </div>
+
+                <!-- Map Section -->
+                <div class="nav-section">
+                    <button class="nav-item nav-parent" title="Map">
+                        <i data-lucide="map" class="nav-icon"></i>
+                        <span class="nav-label">Map</span>
+                        <i data-lucide="chevron-down" class="expand-icon"></i>
+                    </button>
+                </div>
+
+                <!-- Activity Section -->
+                <div class="nav-section">
+                    <button class="nav-item nav-parent" title="Activity">
+                        <i data-lucide="activity" class="nav-icon"></i>
+                        <span class="nav-label">Activity</span>
+                        <i data-lucide="chevron-down" class="expand-icon"></i>
+                    </button>
+                </div>
+
+                <!-- Agent Section -->
+                <div class="nav-section">
+                    <button class="nav-item nav-parent" title="Agent">
+                        <i data-lucide="user" class="nav-icon"></i>
+                        <span class="nav-label">Agent</span>
+                        <i data-lucide="chevron-down" class="expand-icon"></i>
+                    </button>
+                </div>
+
+                <!-- Agreement Section -->
+                <div class="nav-section">
+                    <button class="nav-item nav-parent" title="Agreement">
+                        <i data-lucide="file-text" class="nav-icon"></i>
+                        <span class="nav-label">Agreement</span>
+                        <i data-lucide="chevron-down" class="expand-icon"></i>
+                    </button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <div class="nav-container">
+                    <!-- Logo and Brand -->
+                    <div class="nav-brand">
+                        <svg class="brand-logo" width="40" height="40" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="EG Brandsync">
+                            <path d="M35.2 0.128906H8.8C4.01109 0.128906 0.128906 4.01109 0.128906 8.8V35.2C0.128906 39.9889 4.01109 43.8711 8.8 43.8711H35.2C39.9889 43.8711 43.8711 39.9889 43.8711 35.2V8.8C43.8711 4.01109 39.9889 0.128906 35.2 0.128906Z" fill="white"/>
+                            <path d="M35.2 0.257812C39.9094 0.257812 43.7422 4.08891 43.7422 8.8V35.2C43.7422 39.9094 39.9111 43.7422 35.2 43.7422H8.8C4.09063 43.7422 0.257812 39.9111 0.257812 35.2V8.8C0.257812 4.08891 4.08891 0.257812 8.8 0.257812H35.2ZM35.2 0H8.8C3.93938 0 0 3.93938 0 8.8V35.2C0 40.0606 3.93938 44 8.8 44H35.2C40.0606 44 44 40.0606 44 35.2V8.8C44 3.93938 40.0606 0 35.2 0Z" fill="#E8EAEE"/>
+                            <path d="M18.6037 21.5067L21.5067 18.6037C21.7748 18.3356 22.2097 18.3356 22.4795 18.6037L25.3962 21.5205C25.6644 21.7886 25.6644 22.2251 25.3962 22.4933L22.4933 25.3962C22.2251 25.6644 21.7886 25.6644 21.5205 25.3962L18.6037 22.4795C18.3356 22.2114 18.3356 21.7748 18.6037 21.5067Z" fill="#57B1FF"/>
+                            <path d="M15.6423 12.6586L6.79249 21.5084C6.52437 21.7766 6.52437 22.2114 6.79249 22.4813L9.82781 25.5166C10.0959 25.7847 10.5308 25.7847 10.8006 25.5166L19.6505 16.6667C19.9186 16.3986 19.9186 15.962 19.6505 15.6939L16.6151 12.6586C16.347 12.3905 15.9105 12.3905 15.6423 12.6586Z" fill="#57B1FF"/>
+                            <path d="M28.3559 31.3414L37.2161 22.4813C37.4842 22.2131 37.4842 21.7766 37.2161 21.5084L34.1808 18.4731C33.9127 18.205 33.4778 18.205 33.208 18.4731L24.3478 27.3333C24.0797 27.6014 24.0797 28.038 24.3478 28.3061L27.3831 31.3414C27.6513 31.6095 28.0878 31.6095 28.3559 31.3414Z" fill="#57B1FF"/>
+                            <path d="M28.3577 12.6586L37.2075 21.5084C37.4756 21.7766 37.4756 22.2114 37.2075 22.4813L34.1722 25.5166C33.9041 25.7847 33.4692 25.7847 33.1994 25.5166L24.3495 16.6667C24.0814 16.3986 24.0814 15.962 24.3495 15.6939L27.3848 12.6586C27.653 12.3905 28.0895 12.3905 28.3577 12.6586Z" fill="#1B85FF"/>
+                            <path d="M15.6441 31.3414L6.78392 22.4813C6.51579 22.2131 6.51579 21.7766 6.78392 21.5084L9.81923 18.4731C10.0874 18.205 10.5222 18.205 10.792 18.4731L19.6522 27.3333C19.9203 27.6014 19.9203 28.038 19.6522 28.3061L16.6169 31.3414C16.3488 31.6095 15.9122 31.6095 15.6441 31.3414Z" fill="#1B85FF"/>
+                        </svg>
+                        <span class="brand-name">EG Brandsync</span>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="nav-links">
+                        <a href="#" class="nav-link active">Home</a>
+                        <a href="#" class="nav-link">About</a>
+                        <a href="#" class="nav-link">Statistics</a>
+                        <a href="#" class="nav-link">Pricing</a>
+                    </div>
+
+                    <!-- Navigation Actions -->
+                    <div class="nav-actions">
+                        <!-- Search -->
+                        <div class="search-container">
+                            <i data-lucide="search" class="search-icon"></i>
+                            <input type="text" class="search-input" placeholder="Search...">
+                        </div>
+
+                        <!-- Icon Buttons -->
+                        <button class="icon-button" aria-label="Notifications">
+                            <i data-lucide="bell"></i>
+                        </button>
+
+                        <!-- Theme Toggle -->
+                        <button class="icon-button theme-toggle" aria-label="Toggle theme">
+                            <i data-lucide="sun" class="theme-icon-light"></i>
+                            <i data-lucide="moon" class="theme-icon-dark"></i>
+                        </button>
+
+                        <!-- User Avatar -->
+                        <div class="dropdown-wrapper">
+                            <button class="user-avatar" id="profileBtn" aria-label="User menu">
+                                <img src="https://ui-avatars.com/api/?name=User&background=0073E1&color=fff" alt="User avatar">
+                            </button>
+                            <div class="dropdown-menu" id="profileDropdown">
+                                <button class="dropdown-item">
+                                    <i data-lucide="user"></i>
+                                    <span>Profile</span>
+                                </button>
+                                <button class="dropdown-item">
+                                    <i data-lucide="settings"></i>
+                                    <span>Settings</span>
+                                </button>
+                                <button class="dropdown-item">
+                                    <i data-lucide="help-circle"></i>
+                                    <span>Help</span>
+                                </button>
+                                <div class="dropdown-divider"></div>
+                                <button class="dropdown-item">
+                                    <i data-lucide="log-out"></i>
+                                    <span>Sign out</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Header -->
+            <div class="content-header">
+                <h1 class="page-title">Property</h1>
+                <div class="header-actions">
+                    <button class="btn btn-dropdown">
+                        <span>My reports</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i data-lucide="plus"></i>
+                        <span>New report</span>
+                    </button>
+                    <button class="btn btn-icon">
+                        <i data-lucide="copy"></i>
+                    </button>
+                    <button class="btn btn-icon">
+                        <i data-lucide="filter"></i>
+                    </button>
+                    <button class="btn btn-icon">
+                        <i data-lucide="more-horizontal"></i>
+                    </button>
+                    <div class="spacer"></div>
+                    <button class="btn btn-secondary" id="addAgentRolesBtn">
+                        <i data-lucide="plus"></i>
+                        <span>Add agent roles</span>
+                    </button>
+                    <div class="dropdown-wrapper">
+                        <button class="btn btn-primary" id="newRowBtn">
+                            <i data-lucide="plus"></i>
+                            <span>New row</span>
+                        </button>
+                        <div class="dropdown-menu" id="newRowDropdown">
+                            <button class="dropdown-item">
+                                <i data-lucide="download"></i>
+                                <span>Import</span>
+                            </button>
+                            <button class="dropdown-item">
+                                <i data-lucide="upload"></i>
+                                <span>CSV Export</span>
+                            </button>
+                            <button class="dropdown-item">
+                                <i data-lucide="printer"></i>
+                                <span>Print</span>
+                            </button>
+                            <button class="dropdown-item">
+                                <i data-lucide="file-text"></i>
+                                <span>Create PDF</span>
+                            </button>
+                            <button class="dropdown-item">
+                                <i data-lucide="file-text"></i>
+                                <span>Create PDF landscape</span>
+                            </button>
+                            <button class="dropdown-item">
+                                <i data-lucide="file"></i>
+                                <span>Area report</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Info -->
+            <div class="table-info">
+                Showing rows 1-10 out of 100
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" class="table-checkbox"></th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Post code</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="table-checkbox"></td>
+                            <td>CleanPilot Integration</td>
+                            <td>123 Main Street</td>
+                            <td>1234</td>
+                            <td>Commercial</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>00/00/0000</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="table-checkbox"></td>
+                            <td>CleanPilot Integration II</td>
+                            <td>456 Oak Avenue</td>
+                            <td>5678</td>
+                            <td>Residential</td>
+                            <td><span class="badge badge-neutral">Inactive</span></td>
+                            <td>00/00/0000</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="table-checkbox"></td>
+                            <td>Dynamic_Year_Testing</td>
+                            <td>789 Pine Road</td>
+                            <td>9012</td>
+                            <td>Industrial</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>00/00/0000</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="table-checkbox"></td>
+                            <td>testing_dynamic</td>
+                            <td>321 Elm Street</td>
+                            <td>3456</td>
+                            <td>Commercial</td>
+                            <td><span class="badge badge-error">Expired</span></td>
+                            <td>00/00/0000</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="table-checkbox"></td>
+                            <td>Testing_prop</td>
+                            <td>654 Maple Drive</td>
+                            <td>7890</td>
+                            <td>Residential</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>00/00/0000</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="table-checkbox"></td>
+                            <td>Lysaker Torg 4</td>
+                            <td>Lysaker Torg 4</td>
+                            <td>1366</td>
+                            <td>Office</td>
+                            <td><span class="badge badge-neutral">Inactive</span></td>
+                            <td>00/00/0000</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="table-checkbox"></td>
+                            <td>Lysaker Torg 6</td>
+                            <td>Lysaker Torg 6</td>
+                            <td>1366</td>
+                            <td>Office</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>00/00/0000</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="table-checkbox"></td>
+                            <td>Lysaker Torg 10</td>
+                            <td>Lysaker Torg 10</td>
+                            <td>1366</td>
+                            <td>Office</td>
+                            <td><span class="badge badge-error">Expired</span></td>
+                            <td>00/00/0000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="rows-per-page">
+                    <span>Rows per page</span>
+                    <select class="page-select">
+                        <option value="12" selected>12</option>
+                        <option value="24">24</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="pagination-controls">
+                    <button class="pagination-btn" aria-label="Previous page" disabled>
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    <div class="page-info">
+                        <input type="number" value="2" class="page-input" min="1" max="10">
+                        <span>of 10 pages</span>
+                    </div>
+                    <button class="pagination-btn" aria-label="Next page">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Theme switching functionality
+        const themeToggles = document.querySelectorAll('.theme-toggle, .theme-toggle-btn');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', currentTheme);
+
+        // Theme toggle handler for all theme toggles
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+
+                // Re-initialize icons for smooth transition
+                lucide.createIcons();
+            });
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Navigation Drawer collapse functionality
+        const leftNav = document.querySelector('.left-nav');
+        const collapseToggle = document.querySelector('.collapse-toggle');
+
+        collapseToggle.addEventListener('click', () => {
+            leftNav.classList.toggle('collapsed');
+            const isCollapsed = leftNav.classList.contains('collapsed');
+            collapseToggle.setAttribute('aria-expanded', !isCollapsed);
+
+            // Switch logo viewBox between full and icon-only
+            const logo = document.querySelector('.nav-logo');
+            logo.setAttribute('viewBox', isCollapsed ? '0 0 44 44' : '0 0 223 44');
+
+            // Rotate chevron icon
+            const icon = collapseToggle.querySelector('[data-lucide]');
+            icon.setAttribute('data-lucide', isCollapsed ? 'chevron-right' : 'chevron-left');
+
+            // Re-initialize icons after DOM changes
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        });
+
+        // Mobile menu functionality
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileOverlay = document.querySelector('.mobile-overlay');
+
+        // Toggle mobile menu
+        mobileMenuToggle.addEventListener('click', () => {
+            leftNav.classList.toggle('open');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = leftNav.classList.contains('open') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking overlay
+        mobileOverlay.addEventListener('click', () => {
+            leftNav.classList.remove('open');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close menu when clicking a nav item
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    leftNav.classList.remove('open');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                leftNav.classList.remove('open');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Tree navigation expand/collapse
+        const navParents = document.querySelectorAll('.nav-parent');
+        navParents.forEach(parent => {
+            parent.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = parent.closest('.nav-section');
+                section.classList.toggle('expanded');
+
+                // Re-initialize icons
+                setTimeout(() => {
+                    lucide.createIcons();
+                }, 100);
+            });
+        });
+
+        // Modal functionality
+        const agentRolesModal = document.getElementById('agentRolesModal');
+        const addAgentRolesBtn = document.getElementById('addAgentRolesBtn');
+        const modalClose = document.querySelector('.modal-close');
+        const modalDiscard = document.querySelector('.modal-discard');
+        const modalSave = document.querySelector('.modal-save');
+
+        // Open modal
+        if (addAgentRolesBtn) {
+            addAgentRolesBtn.addEventListener('click', () => {
+                agentRolesModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                // Re-initialize icons after modal opens
+                setTimeout(() => {
+                    lucide.createIcons();
+                }, 100);
+            });
+        }
+
+        // Close modal function
+        function closeModal() {
+            agentRolesModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on X button
+        modalClose.addEventListener('click', closeModal);
+
+        // Close modal on discard button
+        modalDiscard.addEventListener('click', closeModal);
+
+        // Close modal on clicking overlay
+        agentRolesModal.addEventListener('click', (e) => {
+            if (e.target === agentRolesModal) {
+                closeModal();
+            }
+        });
+
+        // Handle save button (you can add your save logic here)
+        modalSave.addEventListener('click', () => {
+            // Add your save logic here
+            console.log('Save agent roles');
+            closeModal();
+        });
+
+        // Dropdown menu functionality
+        const newRowBtn = document.getElementById('newRowBtn');
+        const newRowDropdown = document.getElementById('newRowDropdown');
+
+        // Toggle dropdown
+        if (newRowBtn) {
+            newRowBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                newRowDropdown.classList.toggle('active');
+
+                // Re-initialize icons after dropdown opens
+                setTimeout(() => {
+                    lucide.createIcons();
+                }, 100);
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (newRowDropdown && !newRowDropdown.contains(e.target) && e.target !== newRowBtn) {
+                newRowDropdown.classList.remove('active');
+            }
+        });
+
+        // Handle new row dropdown item clicks
+        const newRowDropdownItems = newRowDropdown ? newRowDropdown.querySelectorAll('.dropdown-item') : [];
+        newRowDropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                console.log('Clicked:', item.textContent.trim());
+                newRowDropdown.classList.remove('active');
+            });
+        });
+
+        // Profile dropdown functionality
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        // Toggle profile dropdown
+        if (profileBtn && profileDropdown) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+
+                // Re-initialize icons after dropdown opens
+                if (profileDropdown.classList.contains('active')) {
+                    setTimeout(() => lucide.createIcons(), 50);
+                }
+            });
+
+            // Close profile dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+
+            // Handle profile dropdown item clicks
+            const profileDropdownItems = profileDropdown.querySelectorAll('.dropdown-item');
+            profileDropdownItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    console.log('Profile action:', item.textContent.trim());
+                    profileDropdown.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

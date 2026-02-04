@@ -1,0 +1,996 @@
+/**
+ * Generated Dashboard CSS - Scoped for Existing MudBlazor Projects
+ * Generated from: _tokens.css + dashboard.html
+ *
+ * Scope: .eg-dashboard-scope
+ * All tokens and overrides are isolated to dashboard pages only.
+ * Existing MudBlazor pages remain unchanged.
+ */
+
+/* ====================================== */
+/* SCOPED DESIGN TOKENS                   */
+/* ====================================== */
+
+.eg-dashboard-scope {
+    /* Primitives - Color Scales */
+    --primary-600: #0062C1;
+    --primary-700: #0051A2;
+    --primary-400: #3E88EF;
+
+    --neutral-25: #F9FAFB;
+    --neutral-50: #EFF0F8;
+    --neutral-100: #DEE2ED;
+    --neutral-200: #C2C7D3;
+    --neutral-400: #828998;
+    --neutral-500: #6D7585;
+    --neutral-600: #5D6472;
+    --neutral-700: #4D535F;
+    --neutral-800: #363C47;
+    --neutral-900: #21262E;
+
+    --success-100: #C5EBD5;
+    --success-600: #11714E;
+    --success-700: #1B5D43;
+
+    --error-100: #FFDAD7;
+    --error-600: #B92F31;
+    --error-700: #982A2A;
+
+    /* Spacing */
+    --spacing-50: 4px;
+    --spacing-100: 8px;
+    --spacing-150: 12px;
+    --spacing-200: 16px;
+    --spacing-250: 20px;
+    --spacing-300: 24px;
+
+    /* Typography */
+    --font-family-body: 'Roboto', sans-serif;
+    --font-size-small: 14px;
+    --font-size-medium: 16px;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Border Radius */
+    --border-radius-50: 4px;
+    --border-radius-100: 8px;
+    --border-radius-full: 120px;
+
+    /* Border Width */
+    --border-width-thin: 1px;
+
+    /* Semantic Tokens */
+    --color-primary-default: var(--primary-600);
+    --color-primary-hover: var(--primary-700);
+    --color-primary-pressed: var(--primary-700);
+
+    --text-default: #000000;
+    --text-secondary: var(--neutral-600);
+    --text-on-action: #ffffff;
+
+    --surface-base: #ffffff;
+    --surface-container: var(--neutral-25);
+    --surface-hover: var(--neutral-50);
+
+    --border-default: var(--neutral-100);
+    --border-neutral-hover: var(--neutral-400);
+    --border-neutral-focus: var(--primary-600);
+
+    --icon-default: var(--neutral-900);
+}
+
+/* Dark Mode Tokens (Scoped) */
+[data-theme="dark"] .eg-dashboard-scope {
+    --primary-400: #3E88EF;
+    --color-primary-default: var(--primary-400);
+
+    --text-default: #ffffff;
+    --text-secondary: var(--neutral-200);
+
+    --surface-base: var(--neutral-950);
+    --surface-container: var(--neutral-900);
+    --surface-hover: var(--neutral-800);
+
+    --border-default: var(--neutral-800);
+}
+
+/* ====================================== */
+/* SCOPED COMPONENT OVERRIDES             */
+/* ====================================== */
+
+/* Page Layout */
+.eg-dashboard-scope .property-page-container {
+    background-color: var(--surface-container);
+    padding: 0;
+}
+
+.eg-dashboard-scope .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-300);
+    margin-bottom: var(--spacing-250);
+    flex-wrap: wrap;
+    gap: var(--spacing-200);
+}
+
+.eg-dashboard-scope .page-title {
+    font-size: 28px !important;
+    font-weight: var(--font-weight-bold) !important;
+    color: var(--text-default) !important;
+    margin: 0 !important;
+}
+
+.eg-dashboard-scope .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-150);
+    flex-wrap: wrap;
+}
+
+.eg-dashboard-scope .spacer {
+    flex: 1;
+    min-width: var(--spacing-200);
+}
+
+.eg-dashboard-scope .table-info {
+    padding: 0 var(--spacing-300) var(--spacing-200) var(--spacing-300);
+    font-size: var(--font-size-medium);
+    color: var(--text-secondary);
+}
+
+/* ====================================== */
+/* BUTTONS                                */
+/* ====================================== */
+
+/* Base button styles */
+.eg-dashboard-scope .mud-button-root.btn-mud {
+    padding: var(--spacing-100) var(--spacing-200) !important;
+    gap: var(--spacing-100) !important;
+    border-radius: var(--border-radius-100) !important;
+    font-size: var(--font-size-medium) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    text-transform: none !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Primary button - filled */
+.eg-dashboard-scope .mud-button-root.btn-primary-mud {
+    background-color: var(--color-primary-default) !important;
+    color: var(--text-on-action) !important;
+    border: none !important;
+}
+
+.eg-dashboard-scope .mud-button-root.btn-primary-mud:hover {
+    background-color: var(--color-primary-hover) !important;
+}
+
+/* Secondary button - outlined */
+.eg-dashboard-scope .mud-button-root.btn-secondary-mud {
+    background-color: transparent !important;
+    color: var(--text-default) !important;
+    border: var(--border-width-thin) solid var(--border-default) !important;
+}
+
+.eg-dashboard-scope .mud-button-root.btn-secondary-mud:hover {
+    background-color: var(--surface-hover) !important;
+    border-color: var(--border-neutral-hover) !important;
+}
+
+/* Dropdown button */
+.eg-dashboard-scope .mud-button-root.btn-dropdown-mud {
+    background-color: transparent !important;
+    color: var(--text-default) !important;
+    border: var(--border-width-thin) solid var(--border-default) !important;
+}
+
+/* Ghost button */
+.eg-dashboard-scope .mud-button-root.btn-ghost-mud {
+    background-color: transparent !important;
+    color: var(--text-default) !important;
+    border: none !important;
+}
+
+.eg-dashboard-scope .mud-button-root.btn-ghost-mud:hover {
+    background-color: var(--surface-hover) !important;
+}
+
+/* Icon button */
+.eg-dashboard-scope .mud-icon-button-root.btn-icon-mud {
+    width: 32px !important;
+    height: 32px !important;
+    padding: var(--spacing-100) !important;
+    border-radius: var(--border-radius-100) !important;
+    border: var(--border-width-thin) solid var(--border-default) !important;
+    background-color: transparent !important;
+    color: var(--icon-default) !important;
+}
+
+.eg-dashboard-scope .mud-icon-button-root.btn-icon-mud:hover {
+    background-color: var(--surface-hover) !important;
+    border-color: var(--border-neutral-hover) !important;
+}
+
+/* Remove ripple effect */
+.eg-dashboard-scope .btn-mud .mud-ripple,
+.eg-dashboard-scope .btn-icon-mud .mud-ripple {
+    display: none !important;
+}
+
+/* ====================================== */
+/* TABLE                                  */
+/* ====================================== */
+
+.eg-dashboard-scope .table-container {
+    background-color: var(--surface-base);
+    border: var(--border-width-thin) solid var(--border-default);
+    border-radius: var(--border-radius-100);
+    overflow: hidden;
+    margin: 0 var(--spacing-300) var(--spacing-300) var(--spacing-300);
+}
+
+.eg-dashboard-scope .mud-table-root.data-table-mud {
+    border: none !important;
+    background-color: var(--surface-base) !important;
+}
+
+/* Table header */
+.eg-dashboard-scope .mud-table-head .table-header-cell-mud {
+    padding: var(--spacing-200) !important;
+    background-color: var(--surface-base) !important;
+    border-bottom: var(--border-width-thin) solid var(--border-default) !important;
+    font-size: var(--font-size-medium) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    color: var(--text-default) !important;
+}
+
+/* Table body cells */
+.eg-dashboard-scope .mud-table-body .table-cell-mud {
+    padding: var(--spacing-200) !important;
+    border-bottom: var(--border-width-thin) solid var(--border-default) !important;
+    font-size: var(--font-size-medium) !important;
+    color: var(--text-default) !important;
+}
+
+/* Table row hover */
+.eg-dashboard-scope .mud-table-root.data-table-mud .mud-table-row:hover {
+    background-color: var(--surface-hover) !important;
+}
+
+/* Last row - no border */
+.eg-dashboard-scope .mud-table-body tr:last-child .table-cell-mud {
+    border-bottom: none !important;
+}
+
+/* ====================================== */
+/* CHECKBOXES                             */
+/* ====================================== */
+
+.eg-dashboard-scope .mud-checkbox.table-checkbox-mud {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.eg-dashboard-scope .mud-checkbox.table-checkbox-mud .mud-button-root {
+    padding: 0 !important;
+    min-width: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* ====================================== */
+/* BADGES/CHIPS                           */
+/* ====================================== */
+
+.eg-dashboard-scope .mud-chip-root.badge-mud {
+    padding: var(--spacing-50) var(--spacing-150) !important;
+    border-radius: var(--border-radius-full) !important;
+    font-size: var(--font-size-small) !important;
+    font-weight: var(--font-weight-medium) !important;
+    height: auto !important;
+    border: none !important;
+}
+
+/* Success badge */
+.eg-dashboard-scope .mud-chip.badge-success-mud {
+    background-color: var(--success-100) !important;
+    color: var(--success-700) !important;
+}
+
+/* Neutral/Inactive badge */
+.eg-dashboard-scope .mud-chip.badge-neutral-mud {
+    background-color: var(--neutral-100) !important;
+    color: var(--neutral-700) !important;
+}
+
+/* Error badge */
+.eg-dashboard-scope .mud-chip.badge-error-mud {
+    background-color: var(--error-100) !important;
+    color: var(--error-700) !important;
+}
+
+/* Remove chip interactions */
+.eg-dashboard-scope .badge-mud .mud-chip-close-button {
+    display: none !important;
+}
+
+.eg-dashboard-scope .mud-chip.badge-mud:hover {
+    background-color: inherit !important;
+}
+
+/* ====================================== */
+/* PAGINATION                             */
+/* ====================================== */
+
+.eg-dashboard-scope .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-300);
+    background-color: var(--surface-base);
+    border-top: var(--border-width-thin) solid var(--border-default);
+    gap: var(--spacing-200);
+    flex-wrap: wrap;
+}
+
+.eg-dashboard-scope .rows-per-page {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-150);
+}
+
+.eg-dashboard-scope .pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-200);
+}
+
+.eg-dashboard-scope .page-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-100);
+}
+
+/* Pagination buttons */
+.eg-dashboard-scope .mud-icon-button.pagination-btn-mud {
+    width: 32px !important;
+    height: 32px !important;
+    padding: var(--spacing-100) !important;
+    border-radius: var(--border-radius-100) !important;
+    border: var(--border-width-thin) solid var(--border-default) !important;
+    background-color: transparent !important;
+    color: var(--icon-default) !important;
+}
+
+.eg-dashboard-scope .mud-icon-button.pagination-btn-mud:hover:not(:disabled) {
+    background-color: var(--surface-hover) !important;
+    border-color: var(--border-neutral-hover) !important;
+}
+
+.eg-dashboard-scope .mud-icon-button.pagination-btn-mud:disabled {
+    opacity: 0.5;
+}
+
+/* Page select */
+.eg-dashboard-scope .mud-select.page-select-mud {
+    min-width: 80px !important;
+}
+
+.eg-dashboard-scope .mud-select.page-select-mud .mud-input-slot {
+    padding: var(--spacing-100) var(--spacing-150) !important;
+}
+
+/* Page input */
+.eg-dashboard-scope .mud-input.page-input-mud {
+    width: 60px !important;
+}
+
+.eg-dashboard-scope .mud-input.page-input-mud .mud-input-slot input {
+    text-align: center !important;
+    padding: var(--spacing-100) !important;
+}
+
+/* ====================================== */
+/* MODAL/DIALOG                           */
+/* ====================================== */
+
+.eg-dashboard-scope .mud-dialog.modal-mud {
+    border-radius: var(--border-radius-100) !important;
+}
+
+.eg-dashboard-scope .modal-title-mud {
+    font-size: 20px !important;
+    font-weight: var(--font-weight-semibold) !important;
+    margin-bottom: var(--spacing-50) !important;
+}
+
+.eg-dashboard-scope .modal-subtitle-mud {
+    font-size: var(--font-size-small) !important;
+    color: var(--text-secondary) !important;
+}
+
+.eg-dashboard-scope .modal-body-mud {
+    padding: var(--spacing-200) 0 !important;
+}
+
+.eg-dashboard-scope .modal-footer-mud {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-150) !important;
+    padding-top: var(--spacing-200) !important;
+}
+
+/* ====================================== */
+/* FORM ELEMENTS                          */
+/* ====================================== */
+
+.eg-dashboard-scope .mud-select.form-select-mud .mud-input-slot,
+.eg-dashboard-scope .mud-input.form-textarea-mud .mud-input-slot {
+    border-radius: var(--border-radius-100) !important;
+}
+
+/* ====================================== */
+/* MENU/DROPDOWN                          */
+/* ====================================== */
+
+.mud-popover.mud-menu-popover {
+    border-radius: var(--border-radius-100) !important;
+}
+
+/* ====================================== */
+/* RESPONSIVE                             */
+/* ====================================== */
+
+@media (max-width: 768px) {
+    .eg-dashboard-scope .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .eg-dashboard-scope .header-actions {
+        width: 100%;
+    }
+
+    .eg-dashboard-scope .pagination-container {
+        flex-direction: column;
+    }
+}
+
+/* ====================================== */
+/* TOP NAVIGATION BAR                     */
+/* ====================================== */
+
+.eg-dashboard-scope .top-nav-mud {
+    background-color: var(--surface-base);
+    border-bottom: var(--border-width-thin) solid var(--border-default);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.eg-dashboard-scope .nav-container-mud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-200);
+    gap: var(--spacing-300);
+}
+
+/* Logo and Brand */
+.eg-dashboard-scope .nav-brand-mud {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-150);
+}
+
+.eg-dashboard-scope .brand-logo-mud {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.eg-dashboard-scope .brand-name-mud {
+    font-size: var(--font-size-medium) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    color: var(--text-default) !important;
+    margin: 0 !important;
+}
+
+/* Navigation Links */
+.eg-dashboard-scope .nav-links-mud {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-100);
+    flex: 1;
+}
+
+.eg-dashboard-scope .nav-link-mud {
+    padding: var(--spacing-100) var(--spacing-200) !important;
+    font-size: var(--font-size-medium) !important;
+    font-weight: var(--font-weight-regular) !important;
+    color: var(--text-secondary) !important;
+    text-decoration: none !important;
+    border-radius: var(--border-radius-100) !important;
+    transition: all 0.2s ease-in-out !important;
+    position: relative;
+}
+
+.eg-dashboard-scope .nav-link-mud:hover {
+    color: var(--text-default) !important;
+    background-color: var(--surface-hover) !important;
+}
+
+.eg-dashboard-scope .nav-link-mud.active {
+    color: var(--color-primary-default) !important;
+    font-weight: var(--font-weight-semibold) !important;
+}
+
+.eg-dashboard-scope .nav-link-mud.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-primary-default);
+    border-radius: var(--border-radius-full);
+}
+
+/* Navigation Actions */
+.eg-dashboard-scope .nav-actions-mud {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-150);
+}
+
+/* Top Nav Search */
+.eg-dashboard-scope .top-nav-search-container-mud {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-100);
+    padding: var(--spacing-100) var(--spacing-200);
+    background-color: var(--surface-container);
+    border: var(--border-width-thin) solid var(--border-default);
+    border-radius: var(--border-radius-100);
+    transition: all 0.2s ease-in-out;
+    min-width: 240px;
+}
+
+.eg-dashboard-scope .top-nav-search-container-mud:focus-within {
+    border-color: var(--border-neutral-focus);
+}
+
+.eg-dashboard-scope .search-icon-mud {
+    color: var(--icon-default) !important;
+}
+
+.eg-dashboard-scope .search-input-mud {
+    flex: 1;
+}
+
+.eg-dashboard-scope .search-input-mud .mud-input-slot {
+    padding: 0 !important;
+}
+
+.eg-dashboard-scope .search-input-mud input {
+    font-size: var(--font-size-medium) !important;
+    color: var(--text-default) !important;
+    padding: 0 !important;
+}
+
+.eg-dashboard-scope .search-input-mud input::placeholder {
+    color: var(--text-secondary) !important;
+}
+
+/* Icon Buttons */
+.eg-dashboard-scope .top-nav-icon-btn-mud {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: var(--border-radius-full) !important;
+    color: var(--icon-default) !important;
+    background: none !important;
+    border: none !important;
+}
+
+.eg-dashboard-scope .top-nav-icon-btn-mud:hover {
+    background-color: var(--surface-container) !important;
+}
+
+.eg-dashboard-scope .top-nav-icon-btn-mud:active {
+    background-color: var(--surface-hover) !important;
+}
+
+/* User Avatar */
+.eg-dashboard-scope .user-avatar-mud {
+    width: 40px !important;
+    height: 40px !important;
+    border: var(--border-width-thin) solid var(--border-default) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.eg-dashboard-scope .user-avatar-mud:hover {
+    border-color: var(--color-primary-default) !important;
+    transform: scale(1.05);
+}
+
+/* Dropdown Menu Items */
+.eg-dashboard-scope .dropdown-item-mud {
+    padding: var(--spacing-100) var(--spacing-200) !important;
+    font-size: var(--font-size-medium) !important;
+}
+
+.eg-dashboard-scope .dropdown-item-mud:hover {
+    background-color: var(--surface-hover) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .eg-dashboard-scope .nav-links-mud {
+        display: none;
+    }
+    
+    .eg-dashboard-scope .top-nav-search-container-mud {
+        min-width: 180px;
+    }
+}
+
+/* ====================================== */
+/* LEFT NAVIGATION DRAWER                 */
+/* ====================================== */
+
+.eg-dashboard-scope .left-nav-mud {
+    width: 320px;
+    min-height: 100vh;
+    background-color: var(--surface-base);
+    border-right: var(--border-width-thin) solid var(--border-default);
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-300);
+    gap: var(--spacing-100);
+    position: relative;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed {
+    width: 80px;
+    padding-left: var(--spacing-150);
+    padding-right: var(--spacing-150);
+}
+
+/* Nav Header */
+.eg-dashboard-scope .nav-header-mud {
+    padding-bottom: var(--spacing-200);
+    transition: all 0.3s ease;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-header-mud {
+    padding-bottom: var(--spacing-150);
+}
+
+.eg-dashboard-scope .nav-header-content-mud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-150);
+    transition: all 0.3s ease;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-header-content-mud {
+    flex-direction: column;
+    gap: var(--spacing-100);
+}
+
+.eg-dashboard-scope .nav-logo-mud {
+    height: 44px;
+    width: auto;
+    flex-shrink: 0;
+    color: var(--text-default);
+    transition: all 0.3s ease;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-logo-mud {
+    width: 44px;
+    height: 44px;
+}
+
+/* Theme Toggle Button */
+.eg-dashboard-scope .theme-toggle-btn-mud {
+    width: 36px !important;
+    height: 36px !important;
+    background-color: var(--surface-container) !important;
+    border: var(--border-width-thin) solid var(--border-default) !important;
+    border-radius: var(--border-radius-100) !important;
+    color: var(--icon-default) !important;
+    flex-shrink: 0;
+}
+
+.eg-dashboard-scope .theme-toggle-btn-mud:hover {
+    background-color: var(--surface-hover) !important;
+}
+
+/* Collapse Toggle */
+.eg-dashboard-scope .collapse-toggle-mud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.eg-dashboard-scope .menu-text-mud {
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-default);
+    transition: opacity 0.3s ease;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .menu-text-mud {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.eg-dashboard-scope .chevron-container-mud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-150);
+    flex-shrink: 0;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .collapse-toggle-mud {
+    justify-content: center;
+}
+
+/* Left Nav Search */
+.eg-dashboard-scope .left-nav-search-container-mud {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-150);
+    padding: var(--spacing-150) var(--spacing-200);
+    background-color: var(--surface-container);
+    border: var(--border-width-thin) solid var(--border-default);
+    border-radius: var(--border-radius-100);
+    transition: all 0.3s ease;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .left-nav-search-container-mud {
+    padding: var(--spacing-150);
+    justify-content: center;
+    gap: 0;
+}
+
+.eg-dashboard-scope .left-nav-search-icon-mud {
+    color: var(--icon-default) !important;
+    flex-shrink: 0;
+}
+
+.eg-dashboard-scope .left-nav-search-input-mud {
+    flex: 1;
+}
+
+.eg-dashboard-scope .left-nav-search-input-mud .mud-input-slot {
+    padding: 0 !important;
+}
+
+.eg-dashboard-scope .left-nav-search-input-mud input {
+    font-size: var(--font-size-medium) !important;
+    color: var(--text-default) !important;
+    padding: 0 !important;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .left-nav-search-input-mud {
+    display: none;
+}
+
+/* Navigation Menu */
+.eg-dashboard-scope .nav-menu-mud {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-100);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-menu-mud {
+    overflow: hidden;
+}
+
+/* Navigation Items */
+.eg-dashboard-scope .nav-item-mud {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: var(--spacing-150) !important;
+    padding: var(--spacing-150) var(--spacing-200) !important;
+    font-size: var(--font-size-medium) !important;
+    font-weight: var(--font-weight-regular) !important;
+    color: var(--text-secondary) !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    border-radius: var(--border-radius-100) !important;
+    transition: all 0.2s ease-in-out !important;
+    position: relative !important;
+    min-height: unset !important;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-item-mud {
+    justify-content: center !important;
+    padding: var(--spacing-150) !important;
+    gap: 0 !important;
+}
+
+.eg-dashboard-scope .nav-item-mud:hover {
+    background-color: var(--surface-hover) !important;
+    color: var(--text-default) !important;
+}
+
+.eg-dashboard-scope .nav-item-mud.active {
+    background-color: var(--neutral-100) !important;
+    color: var(--text-default) !important;
+    font-weight: var(--font-weight-semibold) !important;
+}
+
+[data-theme="dark"] .eg-dashboard-scope .nav-item-mud.active {
+    background-color: var(--neutral-600) !important;
+}
+
+.eg-dashboard-scope .nav-icon-mud {
+    width: 20px !important;
+    height: 20px !important;
+    color: var(--icon-secondary) !important;
+    flex-shrink: 0;
+}
+
+.eg-dashboard-scope .nav-item-mud.active .nav-icon-mud {
+    color: var(--icon-default) !important;
+}
+
+.eg-dashboard-scope .nav-label-mud {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-label-mud {
+    display: none;
+}
+
+/* Expandable Sections */
+.eg-dashboard-scope .nav-section-mud {
+    display: flex;
+    flex-direction: column;
+}
+
+.eg-dashboard-scope .nav-parent-mud {
+    /* Inherits from nav-item-mud */
+}
+
+.eg-dashboard-scope .expand-icon-mud {
+    width: 18px !important;
+    height: 18px !important;
+    color: var(--icon-secondary) !important;
+    transition: transform 0.3s ease !important;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.eg-dashboard-scope .nav-section-mud.expanded .expand-icon-mud {
+    transform: rotate(180deg);
+}
+
+.eg-dashboard-scope .nav-parent-mud.active .expand-icon-mud {
+    color: var(--icon-default) !important;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .expand-icon-mud {
+    display: none;
+}
+
+/* Submenu */
+.eg-dashboard-scope .nav-submenu-mud {
+    display: none;
+    flex-direction: column;
+    padding-left: var(--spacing-400);
+    margin-top: var(--spacing-100);
+    gap: var(--spacing-100);
+}
+
+.eg-dashboard-scope .nav-section-mud.expanded .nav-submenu-mud {
+    display: flex;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-submenu-mud {
+    display: none !important;
+}
+
+.eg-dashboard-scope .nav-child-mud {
+    font-size: var(--font-size-small) !important;
+    padding: var(--spacing-100) var(--spacing-200) !important;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-child-mud {
+    padding: var(--spacing-100) !important;
+}
+
+/* Mobile Navigation */
+.eg-dashboard-scope .mobile-overlay-mud {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+}
+
+.eg-dashboard-scope .left-nav-mud.open ~ .mobile-overlay-mud,
+.eg-dashboard-scope .mobile-overlay-mud {
+    display: block;
+}
+
+/* Tooltip for collapsed state */
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-item-mud::after {
+    content: attr(title);
+    position: absolute;
+    left: calc(100% + var(--spacing-150));
+    padding: var(--spacing-100) var(--spacing-150);
+    background-color: var(--neutral-900);
+    color: white;
+    border-radius: var(--border-radius-100);
+    font-size: var(--font-size-small);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-item-mud:hover::after {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .eg-dashboard-scope .left-nav-mud {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 320px;
+        height: 100vh;
+        z-index: 100;
+        transition: left 0.3s ease;
+    }
+    
+    .eg-dashboard-scope .left-nav-mud.open {
+        left: 0;
+    }
+}
+
+/* Remove MudButton default styles */
+.eg-dashboard-scope .nav-item-mud .mud-button-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-150);
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.eg-dashboard-scope .left-nav-mud.collapsed .nav-item-mud .mud-button-label {
+    justify-content: center;
+    gap: 0;
+}
+
+.eg-dashboard-scope .nav-item-mud .mud-ripple {
+    display: none !important;
+}

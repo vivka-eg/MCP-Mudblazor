@@ -1,0 +1,555 @@
+/**
+ * Design Tokens
+ * Generated from Figma Design System
+ *
+ * Organization:
+ * 1. Primitives - Base color scales, typography scales, shadows
+ * 2. Semantic - Contextual tokens (borders, spacing, sizing)
+ * 3. Components - Component-specific tokens
+ */
+
+:root {
+  /* ====================================== */
+  /* 1. PRIMITIVES                          */
+  /* ====================================== */
+
+  /* Static Colors */
+  --static-black: #000000;
+  --static-white: #ffffff;
+
+  /* Neutral Scale */
+  --neutral-25: #F9FAFB;
+  --neutral-50: #EFF0F8;
+  --neutral-50-transparent: #EFF0F8E6;
+  --neutral-100: #DEE2ED;
+  --neutral-200: #C2C7D3;
+  --neutral-300: #A0A5B4;
+  --neutral-400: #828998;
+  --neutral-500: #6D7585;
+  --neutral-500-transparent: #6D75854D;
+  --neutral-500-transparent-2: #6D7585BF;
+  --neutral-600: #5D6472;
+  --neutral-700: #4D535F;
+  --neutral-800: #363C47;
+  --neutral-900: #21262E;
+  --neutral-950: #191C22;
+
+  /* Gray Scale */
+  --gray-25: #FBFBFB;
+  --gray-50: #F6F7F7;
+  --gray-100: #EEF1F1;
+  --gray-200: #DFE5E6;
+  --gray-300: #CBD3D6;
+  --gray-400: #B6BEC3;
+  --gray-500: #A2AAB2;
+  --gray-600: #8C959F;
+  --gray-700: #7F868F;
+  --gray-800: #636970;
+  --gray-900: #53585C;
+  --gray-950: #303236;
+  --gray-transparent: #A2AAB23D;
+  --gray-transparent-2: #A2AAB252;
+  --gray-transparent-3: #A2AAB270;
+
+  /* Success Scale */
+  --success-50: #E5F5E9;
+  --success-100: #C5EBD5;
+  --success-200: #94D4B3;
+  --success-300: #6BB491;
+  --success-400: #469873;
+  --success-500: #00855B;
+  --success-600: #11714E;
+  --success-700: #1B5D43;
+  --success-800: #184330;
+  --success-900: #0F2B1E;
+  --success-950: #101E17;
+
+  /* Error Scale */
+  --error-50: #FCECEA;
+  --error-100: #FFDAD7;
+  --error-200: #FFB3AE;
+  --error-300: #FF807A;
+  --error-400: #EE5351;
+  --error-500: #D93539;
+  --error-600: #B92F31;
+  --error-700: #982A2A;
+  --error-800: #701D1E;
+  --error-900: #481212;
+  --error-950: #34100F;
+
+  /* Warning Scale */
+  --warning-50: #FFEFDB;
+  --warning-100: #FFDEA1;
+  --warning-200: #F1BD51;
+  --warning-300: #D39B00;
+  --warning-400: #B18100;
+  --warning-500: #956D00;
+  --warning-600: #805D00;
+  --warning-700: #6B4D00;
+  --warning-800: #4E3700;
+  --warning-900: #332300;
+  --warning-950: #261A00;
+
+  /* Information Scale */
+  --information-50: #EDF0FA;
+  --information-100: #D6E3F8;
+  --information-200: #AEC8ED;
+  --information-300: #73A9EA;
+  --information-400: #448CD6;
+  --information-500: #0078CB;
+  --information-600: #0066AE;
+  --information-700: #005592;
+  --information-800: #003D6C;
+  --information-900: #00283F;
+  --information-950: #111C2A;
+
+  /* Primary (Brand Blue) Scale */
+  --primary-50: #EEF0FA;
+  --primary-100: #D8E3FC;
+  --primary-200: #AEC7F8;
+  --primary-300: #7AA6F2;
+  --primary-400: #3E88EF;
+  --primary-500: #0073E1;
+  --primary-600: #0062C1;
+  --primary-700: #0051A2;
+  --primary-800: #003A78;
+  --primary-900: #002550;
+  --primary-950: #001B3E;
+
+  /* Typography - Font Family */
+  --font-family-heading: 'Roboto', sans-serif;
+  --font-family-body: 'Roboto', sans-serif;
+
+  /* Typography - Font Weight */
+  --font-weight-thin: 100;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Typography - Font Size */
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 18px;
+
+  /* Scale (Spacing/Sizing) */
+  --scale-600: -48px;
+  --scale-500: -40px;
+  --scale-350: -28px;
+  --scale-200: -16px;
+  --scale-150: -12px;
+  --scale-100: -8px;
+  --scale-0: 0px;
+  --scale-10: 1px;
+  --scale-25: 2px;
+  --scale-50: 4px;
+  --scale-75: 6px;
+  --scale-100: 8px;
+  --scale-150: 12px;
+  --scale-200: 16px;
+  --scale-250: 20px;
+  --scale-300: 24px;
+  --scale-350: 28px;
+  --scale-400: 32px;
+  --scale-500: 40px;
+  --scale-550: 44px;
+  --scale-600: 48px;
+  --scale-700: 56px;
+  --scale-800: 64px;
+  --scale-1000: 80px;
+  --scale-1200: 96px;
+  --scale-1500: 120px;
+  --scale-1600: 128px;
+  --scale-3200: 256px;
+  --scale-6400: 512px;
+
+  /* ====================================== */
+  /* 2. SEMANTIC                            */
+  /* ====================================== */
+
+  /* Primary Colors - Light Mode */
+  --color-primary-default: var(--primary-600);
+  --color-primary-hover: var(--primary-700);
+  --color-primary-focused: var(--primary-700);
+  --color-primary-pressed: var(--primary-800);
+  --color-primary-container: var(--primary-50);
+  --color-primary-container-hover: var(--primary-100);
+
+  /* Neutral Colors - Light Mode */
+  --color-neutral-default: var(--neutral-700);
+  --color-neutral-hover: var(--neutral-800);
+  --color-neutral-focused: var(--neutral-800);
+  --color-neutral-pressed: var(--neutral-900);
+  --color-neutral-container: var(--neutral-25);
+  --color-neutral-container-hover: var(--neutral-50);
+  --color-neutral-container-focused: var(--neutral-100);
+  --color-neutral-container-pressed: var(--neutral-200);
+
+  /* Success Colors - Light Mode */
+  --color-success-default: var(--success-600);
+  --color-success-hover: var(--success-700);
+  --color-success-focused: var(--success-700);
+  --color-success-pressed: var(--success-800);
+  --color-success-container: var(--success-100);
+
+  /* Warning Colors - Light Mode */
+  --color-warning-default: var(--warning-600);
+  --color-warning-hover: var(--warning-700);
+  --color-warning-focused: var(--warning-700);
+  --color-warning-pressed: var(--warning-800);
+  --color-warning-container: var(--warning-200);
+
+  /* Error Colors - Light Mode */
+  --color-error-default: var(--error-600);
+  --color-error-hover: var(--error-700);
+  --color-error-focused: var(--error-700);
+  --color-error-pressed: var(--error-800);
+  --color-error-container: var(--error-100);
+
+  /* Info Colors - Light Mode */
+  --color-info-default: var(--information-600);
+  --color-info-hover: var(--information-700);
+  --color-info-focused: var(--information-700);
+  --color-info-active: var(--information-800);
+  --color-info-container: var(--information-100);
+
+  /* Text Colors - Light Mode */
+  --text-static-white: var(--static-white);
+  --text-static-black: var(--static-black);
+  --text-default: var(--static-black);
+  --text-secondary: var(--neutral-600);
+  --text-muted: var(--neutral-500);
+  --text-inverse: var(--static-white);
+  --text-link: var(--primary-700);
+  --text-action: var(--primary-600);
+  --text-action-hover: var(--primary-700);
+  --text-success: var(--success-700);
+  --text-info: var(--information-700);
+  --text-warning: var(--warning-700);
+  --text-error: var(--error-700);
+  --text-on-action: var(--static-white);
+  --text-on-disabled: var(--neutral-400);
+  --text-neutral-default: var(--neutral-700);
+  --text-neutral-hover: var(--neutral-800);
+  --text-neutral-focused: var(--neutral-800);
+  --text-neutral-pressed: var(--neutral-900);
+
+  /* Surface Colors - Light Mode */
+  --surface-base: var(--static-white);
+  --surface-raised: var(--static-white);
+  --surface-container: var(--neutral-25);
+  --surface-hover: var(--neutral-50);
+  --surface-focus: var(--neutral-50);
+  --surface-pressed: var(--neutral-200);
+  --surface-selected: var(--neutral-100);
+  --surface-selected-hover: var(--neutral-200);
+  --surface-selected-focus: var(--neutral-200);
+  --surface-selected-pressed: var(--neutral-200);
+  --surface-active: var(--neutral-100);
+  --surface-action: var(--color-primary-default);
+  --surface-inset: var(--neutral-50);
+  --surface-inverse: var(--neutral-900);
+  --surface-accent: var(--gray-transparent-2);
+  --surface-on-action: var(--gray-25);
+  --surface-on-action-disabled: var(--neutral-400);
+  --surface-action-disabled: var(--neutral-100);
+  --surface-success: var(--success-50);
+  --surface-info: var(--information-50);
+  --surface-warning: var(--warning-50);
+  --surface-error: var(--error-50);
+  --surface-overlay: var(--neutral-500-transparent);
+  --surface-overlay-level-2: var(--neutral-500-transparent-2);
+
+  /* Icon Colors - Light Mode */
+  --icon-static-white: var(--static-white);
+  --icon-static-black: var(--static-black);
+  --icon-default: var(--neutral-900);
+  --icon-secondary: var(--neutral-700);
+  --icon-muted: var(--neutral-500);
+  --icon-disabled: var(--neutral-400);
+  --icon-inverse: var(--static-white);
+  --icon-action: var(--primary-600);
+  --icon-action-hover: var(--primary-700);
+  --icon-success: var(--success-700);
+  --icon-info: var(--information-700);
+  --icon-warning: var(--warning-700);
+  --icon-error: var(--error-700);
+  --icon-neutral-default: var(--neutral-700);
+  --icon-neutral-hover: var(--neutral-800);
+  --icon-neutral-focused: var(--neutral-800);
+  --icon-neutral-pressed: var(--neutral-900);
+
+  /* Border Colors - Light Mode */
+  --border-default: var(--neutral-100);
+  --border-neutral-hover: var(--neutral-400);
+  --border-neutral-focus: var(--primary-600);
+  --border-neutral-active: var(--neutral-500);
+  --border-neutral-disabled: var(--neutral-200);
+  --border-neutral-container: var(--neutral-200);
+  --border-neutral-container-hover: var(--neutral-300);
+  --border-neutral-container-focused: var(--neutral-300);
+  --border-neutral-container-pressed: var(--neutral-400);
+  --border-success: var(--success-500);
+  --border-success-hover: var(--success-600);
+  --border-success-focus: var(--success-700);
+  --border-warning: var(--warning-500);
+  --border-warning-hover: var(--warning-600);
+  --border-warning-focus: var(--warning-700);
+  --border-error: var(--error-700);
+  --border-error-hover: var(--error-800);
+  --border-error-focus: var(--error-700);
+  --border-info: var(--information-500);
+  --border-info-hover: var(--information-600);
+  --border-info-focus: var(--information-700);
+  --border-primary: var(--primary-500);
+  --border-primary-hover: var(--primary-600);
+  --border-primary-focus: var(--primary-600);
+  --border-primary-pressed: var(--primary-700);
+
+  /* Border Width */
+  --border-width-0: var(--scale-0);
+  --border-width-thin: var(--scale-10);
+  --border-width-medium: var(--scale-25);
+  --border-width-thick: var(--scale-50);
+
+  /* Border Radius */
+  --border-radius-0: var(--scale-0);
+  --border-radius-50: var(--scale-50);
+  --border-radius-75: var(--scale-75);
+  --border-radius-100: var(--scale-100);
+  --border-radius-150: var(--scale-150);
+  --border-radius-200: var(--scale-200);
+  --border-radius-300: var(--scale-300);
+  --border-radius-full: var(--scale-1500);
+
+  /* Spacing */
+  --spacing-600: var(--scale-600);
+  --spacing-500: var(--scale-500);
+  --spacing-350: var(--scale-350);
+  --spacing-200: var(--scale-200);
+  --spacing-150: var(--scale-150);
+  --spacing-100: var(--scale-100);
+  --spacing-0: var(--scale-0);
+  --spacing-25: var(--scale-25);
+  --spacing-50: var(--scale-50);
+  --spacing-75: var(--scale-75);
+  --spacing-100: var(--scale-100);
+  --spacing-150: var(--scale-150);
+  --spacing-200: var(--scale-200);
+  --spacing-250: var(--scale-250);
+  --spacing-300: var(--scale-300);
+  --spacing-350: var(--scale-350);
+  --spacing-400: var(--scale-400);
+  --spacing-500: var(--scale-500);
+  --spacing-550: var(--scale-550);
+  --spacing-600: var(--scale-600);
+  --spacing-700: var(--scale-700);
+  --spacing-800: var(--scale-800);
+  --spacing-1000: var(--scale-1000);
+  --spacing-1200: var(--scale-1200);
+  --spacing-1500: var(--scale-1500);
+
+  /* Sizing */
+  --sizing-75: var(--scale-75);
+  --sizing-100: var(--scale-100);
+  --sizing-200: var(--scale-200);
+  --sizing-250: var(--scale-250);
+  --sizing-300: var(--scale-300);
+  --sizing-400: var(--scale-400);
+  --sizing-500: var(--scale-500);
+  --sizing-600: var(--scale-600);
+  --sizing-700: var(--scale-700);
+  --sizing-800: var(--scale-800);
+  --sizing-1000: var(--scale-1000);
+  --sizing-1200: var(--scale-1200);
+  --sizing-1600: var(--scale-1600);
+  --sizing-3200: var(--scale-3200);
+  --sizing-6400: var(--scale-6400);
+
+  /* Opacity */
+  --opacity-disabled: 0.5;
+  --opacity-hover: 0.8;
+  --opacity-focus: 0.9;
+
+  /* Transitions */
+  --transition-default: all 0.2s ease-in-out;
+  --transition-fast: all 0.15s ease-in-out;
+  --transition-slow: all 0.3s ease-in-out;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    /* Primary Colors - Dark Mode */
+    --color-primary-default: var(--primary-400);
+    --color-primary-hover: var(--primary-300);
+    --color-primary-focused: var(--primary-300);
+    --color-primary-pressed: var(--primary-200);
+    --color-primary-container: var(--primary-950);
+    --color-primary-container-hover: var(--primary-900);
+
+    /* Neutral Colors - Dark Mode */
+    --color-neutral-default: var(--neutral-300);
+    --color-neutral-hover: var(--neutral-200);
+    --color-neutral-focused: var(--neutral-200);
+    --color-neutral-pressed: var(--neutral-50);
+    --color-neutral-container: var(--neutral-900);
+    --color-neutral-container-hover: var(--neutral-800);
+    --color-neutral-container-focused: var(--neutral-800);
+    --color-neutral-container-pressed: var(--neutral-700);
+
+    /* Success Colors - Dark Mode */
+    --color-success-default: var(--success-400);
+    --color-success-hover: var(--success-300);
+    --color-success-focused: var(--success-300);
+    --color-success-pressed: var(--success-200);
+    --color-success-container: var(--success-800);
+
+    /* Warning Colors - Dark Mode */
+    --color-warning-default: var(--warning-400);
+    --color-warning-hover: var(--warning-300);
+    --color-warning-focused: var(--warning-300);
+    --color-warning-pressed: var(--warning-200);
+    --color-warning-container: var(--warning-800);
+
+    /* Error Colors - Dark Mode */
+    --color-error-default: var(--error-400);
+    --color-error-hover: var(--error-300);
+    --color-error-focused: var(--error-300);
+    --color-error-pressed: var(--error-200);
+    --color-error-container: var(--error-950);
+
+    /* Info Colors - Dark Mode */
+    --color-info-default: var(--information-400);
+    --color-info-hover: var(--information-300);
+    --color-info-focused: var(--information-300);
+    --color-info-active: var(--information-200);
+    --color-info-container: var(--information-800);
+
+    /* Text Colors - Dark Mode */
+    --text-static-white: var(--static-white);
+    --text-static-black: var(--static-black);
+    --text-default: var(--static-white);
+    --text-secondary: var(--neutral-200);
+    --text-muted: var(--neutral-300);
+    --text-inverse: var(--static-black);
+    --text-link: var(--primary-400);
+    --text-action: var(--primary-400);
+    --text-action-hover: var(--primary-500);
+    --text-success: var(--success-300);
+    --text-info: var(--information-300);
+    --text-warning: var(--warning-300);
+    --text-error: var(--error-300);
+    --text-on-action: var(--static-black);
+    --text-on-disabled: var(--neutral-600);
+    --text-neutral-default: var(--neutral-300);
+    --text-neutral-hover: var(--neutral-200);
+    --text-neutral-focused: var(--neutral-200);
+    --text-neutral-pressed: var(--neutral-50);
+
+    /* Surface Colors - Dark Mode */
+    --surface-base: var(--neutral-950);
+    --surface-raised: var(--neutral-900);
+    --surface-container: var(--neutral-900);
+    --surface-hover: var(--neutral-800);
+    --surface-focus: var(--neutral-800);
+    --surface-pressed: var(--neutral-600);
+    --surface-selected: var(--neutral-700);
+    --surface-selected-hover: var(--neutral-700);
+    --surface-selected-focus: var(--neutral-700);
+    --surface-selected-pressed: var(--neutral-600);
+    --surface-active: var(--neutral-600);
+    --surface-action: var(--color-primary-default);
+    --surface-inset: var(--neutral-900);
+    --surface-inverse: var(--neutral-50-transparent);
+    --surface-accent: var(--gray-transparent-2);
+    --surface-on-action: var(--gray-900);
+    --surface-on-action-disabled: var(--neutral-400);
+    --surface-action-disabled: var(--neutral-900);
+    --surface-success: var(--success-600);
+    --surface-info: var(--information-600);
+    --surface-warning: var(--warning-600);
+    --surface-error: var(--error-600);
+    --surface-overlay: var(--neutral-500-transparent-2);
+    --surface-overlay-level-2: var(--neutral-500-transparent);
+
+    /* Icon Colors - Dark Mode */
+    --icon-static-white: var(--static-white);
+    --icon-static-black: var(--static-black);
+    --icon-default: var(--neutral-25);
+    --icon-secondary: var(--neutral-200);
+    --icon-muted: var(--neutral-400);
+    --icon-disabled: var(--neutral-600);
+    --icon-inverse: var(--static-black);
+    --icon-action: var(--primary-400);
+    --icon-action-hover: var(--primary-300);
+    --icon-success: var(--success-400);
+    --icon-info: var(--information-300);
+    --icon-warning: var(--warning-300);
+    --icon-error: var(--error-300);
+    --icon-neutral-default: var(--neutral-300);
+    --icon-neutral-hover: var(--neutral-200);
+    --icon-neutral-focused: var(--neutral-200);
+    --icon-neutral-pressed: var(--neutral-50);
+
+    /* Border Colors - Dark Mode */
+    --border-default: var(--neutral-800);
+    --border-neutral-hover: var(--neutral-300);
+    --border-neutral-focus: var(--primary-400);
+    --border-neutral-active: var(--neutral-500);
+    --border-neutral-disabled: var(--neutral-700);
+    --border-neutral-container: var(--neutral-700);
+    --border-neutral-container-hover: var(--neutral-500);
+    --border-neutral-container-focused: var(--neutral-500);
+    --border-neutral-container-pressed: var(--neutral-300);
+    --border-success: var(--success-400);
+    --border-success-hover: var(--success-300);
+    --border-success-focus: var(--success-200);
+    --border-warning: var(--warning-400);
+    --border-warning-hover: var(--warning-300);
+    --border-warning-focus: var(--warning-300);
+    --border-error: var(--error-300);
+    --border-error-hover: var(--error-200);
+    --border-error-focus: var(--error-50);
+    --border-info: var(--information-400);
+    --border-info-hover: var(--information-600);
+    --border-info-focus: var(--information-200);
+    --border-primary: var(--primary-400);
+    --border-primary-hover: var(--primary-300);
+    --border-primary-focus: var(--primary-300);
+    --border-primary-pressed: var(--primary-200);
+
+  /* ====================================== */
+  /* LOGO TOKENS                            */
+  /* ====================================== */
+
+  /* Logo Icon Only (44x44) - Contains geometric icon */
+  --logo-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44' fill='none'%3E%3Cpath d='M35.2 0.257812C39.9094 0.257812 43.7422 4.08891 43.7422 8.8V35.2C43.7422 39.9094 39.9111 43.7422 35.2 43.7422H8.8C4.09063 43.7422 0.257812 39.9111 0.257812 35.2V8.8C0.257812 4.08891 4.08891 0.257812 8.8 0.257812H35.2ZM35.2 0H8.8C3.93938 0 0 3.93938 0 8.8V35.2C0 40.0606 3.93938 44 8.8 44H35.2C40.0606 44 44 40.0606 44 35.2V8.8C44 3.93938 40.0606 0 35.2 0Z' fill='%23E8EAEE'/%3E%3Cpath d='M18.6037 21.5067L21.5067 18.6037C21.7748 18.3356 22.2097 18.3356 22.4795 18.6037L25.3962 21.5205C25.6644 21.7886 25.6644 22.2251 25.3962 22.4933L22.4933 25.3962C22.2251 25.6644 21.7886 25.6644 21.5205 25.3962L18.6037 22.4795C18.3356 22.2114 18.3356 21.7748 18.6037 21.5067Z' fill='%2357B1FF'/%3E%3Cpath d='M15.6423 12.6586L6.79249 21.5084C6.52437 21.7766 6.52437 22.2114 6.79249 22.4813L9.82781 25.5166C10.0959 25.7847 10.5308 25.7847 10.8006 25.5166L19.6505 16.6667C19.9186 16.3986 19.9186 15.962 19.6505 15.6939L16.6151 12.6586C16.347 12.3905 15.9105 12.3905 15.6423 12.6586Z' fill='%2357B1FF'/%3E%3Cpath d='M28.3559 31.3414L37.2161 22.4813C37.4842 22.2131 37.4842 21.7766 37.2161 21.5084L34.1808 18.4731C33.9127 18.205 33.4778 18.205 33.208 18.4731L24.3478 27.3333C24.0797 27.6014 24.0797 28.038 24.3478 28.3061L27.3831 31.3414C27.6513 31.6095 28.0878 31.6095 28.3559 31.3414Z' fill='%2357B1FF'/%3E%3Cpath d='M28.3577 12.6586L37.2075 21.5084C37.4756 21.7766 37.4756 22.2114 37.2075 22.4813L34.1722 25.5166C33.9041 25.7847 33.4692 25.7847 33.1994 25.5166L24.3495 16.6667C24.0814 16.3986 24.0814 15.962 24.3495 15.6939L27.3848 12.6586C27.653 12.3905 28.0895 12.3905 28.3577 12.6586Z' fill='%231B85FF'/%3E%3Cpath d='M15.6441 31.3414L6.78392 22.4813C6.51579 22.2131 6.51579 21.7766 6.78392 21.5084L9.81923 18.4731C10.0874 18.205 10.5222 18.205 10.792 18.4731L19.6522 27.3333C19.9203 27.6014 19.9203 28.038 19.6522 28.3061L16.6169 31.3414C16.3488 31.6095 15.9122 31.6095 15.6441 31.3414Z' fill='%231B85FF'/%3E%3C/svg%3E");
+
+  /* Logo Full with Text (223x44) - Icon + "EG Brandsync" text */
+  --logo-full: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 223 44' fill='none'%3E%3Cg clip-path='url(%23clip0)'%3E%3Cpath d='M35.2 0.128906H8.8C4.01109 0.128906 0.128906 4.01109 0.128906 8.8V35.2C0.128906 39.9889 4.01109 43.8711 8.8 43.8711H35.2C39.9889 43.8711 43.8711 39.9889 43.8711 35.2V8.8C43.8711 4.01109 39.9889 0.128906 35.2 0.128906Z' fill='white'/%3E%3Cpath d='M35.2 0.257812C39.9094 0.257812 43.7422 4.08891 43.7422 8.8V35.2C43.7422 39.9094 39.9111 43.7422 35.2 43.7422H8.8C4.09063 43.7422 0.257812 39.9111 0.257812 35.2V8.8C0.257812 4.08891 4.08891 0.257812 8.8 0.257812H35.2ZM35.2 0H8.8C3.93938 0 0 3.93938 0 8.8V35.2C0 40.0606 3.93938 44 8.8 44H35.2C40.0606 44 44 40.0606 44 35.2V8.8C44 3.93938 40.0606 0 35.2 0Z' fill='%23E8EAEE'/%3E%3Cpath d='M18.6037 21.5067L21.5067 18.6037C21.7748 18.3356 22.2097 18.3356 22.4795 18.6037L25.3962 21.5205C25.6644 21.7886 25.6644 22.2251 25.3962 22.4933L22.4933 25.3962C22.2251 25.6644 21.7886 25.6644 21.5205 25.3962L18.6037 22.4795C18.3356 22.2114 18.3356 21.7748 18.6037 21.5067Z' fill='%2357B1FF'/%3E%3Cpath d='M15.6423 12.6586L6.79249 21.5084C6.52437 21.7766 6.52437 22.2114 6.79249 22.4813L9.82781 25.5166C10.0959 25.7847 10.5308 25.7847 10.8006 25.5166L19.6505 16.6667C19.9186 16.3986 19.9186 15.962 19.6505 15.6939L16.6151 12.6586C16.347 12.3905 15.9105 12.3905 15.6423 12.6586Z' fill='%2357B1FF'/%3E%3Cpath d='M28.3559 31.3414L37.2161 22.4813C37.4842 22.2131 37.4842 21.7766 37.2161 21.5084L34.1808 18.4731C33.9127 18.205 33.4778 18.205 33.208 18.4731L24.3478 27.3333C24.0797 27.6014 24.0797 28.038 24.3478 28.3061L27.3831 31.3414C27.6513 31.6095 28.0878 31.6095 28.3559 31.3414Z' fill='%2357B1FF'/%3E%3Cpath d='M28.3577 12.6586L37.2075 21.5084C37.4756 21.7766 37.4756 22.2114 37.2075 22.4813L34.1722 25.5166C33.9041 25.7847 33.4692 25.7847 33.1994 25.5166L24.3495 16.6667C24.0814 16.3986 24.0814 15.962 24.3495 15.6939L27.3848 12.6586C27.653 12.3905 28.0895 12.3905 28.3577 12.6586Z' fill='%231B85FF'/%3E%3Cpath d='M15.6441 31.3414L6.78392 22.4813C6.51579 22.2131 6.51579 21.7766 6.78392 21.5084L9.81923 18.4731C10.0874 18.205 10.5222 18.205 10.792 18.4731L19.6522 27.3333C19.9203 27.6014 19.9203 28.038 19.6522 28.3061L16.6169 31.3414C16.3488 31.6095 15.9122 31.6095 15.6441 31.3414Z' fill='%231B85FF'/%3E%3Cpath d='M176.113 17.8681C175.483 17.8681 174.878 17.9506 174.316 18.1156C173.86 18.248 173.36 18.4628 172.753 18.7859V18.5986C172.753 18.4164 172.685 18.2995 172.616 18.2084C172.525 18.0881 172.377 18.0211 172.198 18.0211H171.098C170.937 18.0211 170.813 18.0744 170.692 18.193C170.56 18.3253 170.543 18.4663 170.543 18.5986V29.8169C170.543 29.9784 170.596 30.1022 170.715 30.2225C170.832 30.3394 170.954 30.3944 171.098 30.3944H172.176C172.337 30.3944 172.461 30.3411 172.581 30.2225C172.693 30.1108 172.753 29.9681 172.753 29.8169V20.6198C173.841 20.0853 174.793 19.8138 175.586 19.8138C176.378 19.8138 176.98 20.0131 177.33 20.405C177.681 20.7969 177.867 21.5497 177.867 22.5792V29.8152C177.867 29.9767 177.92 30.1005 178.038 30.2208C178.157 30.3394 178.282 30.3927 178.444 30.3927H179.499C179.661 30.3927 179.785 30.3394 179.905 30.2208C180.024 30.1022 180.077 29.9767 180.077 29.8152V22.5792C180.077 19.4528 178.743 17.8664 176.112 17.8664' fill='currentColor'/%3E%3Cpath d='M111.347 17.8681C110.328 17.8681 109.355 18.1741 108.384 18.8031V18.5986C108.384 18.437 108.331 18.3133 108.212 18.193C108.104 18.0847 108.006 18.0211 107.829 18.0211H106.796C106.635 18.0211 106.511 18.0744 106.391 18.193C106.258 18.3253 106.241 18.4663 106.241 18.5986V29.8169C106.241 29.9784 106.294 30.1022 106.413 30.2225C106.53 30.3394 106.652 30.3944 106.796 30.3944H107.874C108.035 30.3944 108.159 30.3411 108.28 30.2225C108.391 30.1125 108.451 29.9681 108.451 29.8169V20.68C109.436 20.1059 110.411 19.8155 111.349 19.8155C111.891 19.8155 111.949 19.458 111.949 19.3033V18.4009C111.949 18.0624 111.731 17.8681 111.349 17.8681' fill='currentColor'/%3E%3Cpath d='M186.924 19.8361C187.904 19.8361 188.791 19.8859 189.635 19.9891H189.74C189.839 19.9891 189.985 19.977 190.101 19.8619C190.175 19.788 190.25 19.69 190.25 19.5233V18.7309C190.25 18.5917 190.235 18.4181 190.121 18.303C190.049 18.2308 189.915 18.138 189.695 18.1105C188.724 17.9489 187.792 17.8664 186.923 17.8664C185.398 17.8664 184.202 18.3717 183.365 19.3669C182.514 20.3775 182.102 21.6803 182.102 23.3492V25.0645C182.102 26.7317 182.516 28.0345 183.365 29.0469C184.202 30.042 185.4 30.5473 186.923 30.5473C187.827 30.5473 188.734 30.4683 189.69 30.305C189.915 30.2775 190.049 30.1847 190.121 30.1125C190.235 29.9991 190.25 29.8238 190.25 29.6845V28.8922C190.25 28.7255 190.175 28.6275 190.101 28.5536C189.985 28.4384 189.839 28.4247 189.74 28.4247H189.637C188.729 28.5278 187.842 28.5794 186.924 28.5794C185.166 28.5794 184.312 27.4295 184.312 25.0663V23.3509C184.312 20.9859 185.166 19.8378 186.924 19.8378' fill='currentColor'/%3E%3Cpath d='M64.2331 30.6419C62.6072 30.6419 61.3645 30.2947 60.5378 29.6106C59.6991 28.9145 59.2728 27.7922 59.2728 26.2763V17.808C59.2728 16.2903 59.6991 15.168 60.5378 14.4736C61.3628 13.7895 62.6072 13.4424 64.2331 13.4424C68.1209 13.4424 69.4048 13.4819 70.3845 13.5747C70.5959 13.5799 70.7094 13.75 70.7472 13.8067C70.8211 13.9184 70.8589 14.037 70.8589 14.1574V15.2574C70.8589 15.4206 70.8091 15.553 70.7128 15.6492C70.62 15.742 70.4842 15.7953 70.3433 15.7953H64.2555C63.5491 15.7953 62.9991 15.8709 62.6175 16.0188C62.2858 16.1477 62.0778 16.323 61.9781 16.5533C61.8733 16.7974 61.8234 17.1978 61.8234 17.808V20.5906H69.9102C70.1078 20.5906 70.2677 20.6577 70.412 20.8038C70.5564 20.9481 70.6252 21.108 70.6252 21.3056V22.1409C70.6252 22.3386 70.5581 22.4984 70.412 22.6428C70.2677 22.7872 70.1078 22.8559 69.9102 22.8559H61.8234V26.2763C61.8234 26.8881 61.8716 27.2869 61.9781 27.5309C62.0761 27.7613 62.2858 27.9366 62.6175 28.0655C62.9819 28.2064 63.3772 28.2889 64.6422 28.2889H70.3433C70.4859 28.2889 70.6217 28.3422 70.7145 28.435C70.8108 28.5313 70.8606 28.6636 70.8606 28.8269V29.9492C70.8606 30.0695 70.8228 30.1881 70.7489 30.2999C70.7111 30.3566 70.5977 30.5267 70.3777 30.5319C69.6197 30.6024 68.09 30.6419 66.0773 30.6419H64.2348H64.2331Z' fill='currentColor'/%3E%3Cpath d='M86.1352 22.3541V29.6038C86.1352 30.0678 85.8842 30.1538 85.7777 30.1847C85.7227 30.2019 83.4814 30.6969 79.8445 30.6969C75.5184 30.6969 72.1823 28.227 72.1823 23.7944C72.1823 23.3819 72.1772 23.2306 72.1772 20.4944C72.1772 14.7417 76.627 13.4131 80.0937 13.4131C83.2184 13.4131 84.3219 13.6795 85.5009 13.8583C85.6127 13.8755 85.7141 13.9081 85.7983 13.9545C85.8619 13.9889 85.9169 14.0319 85.9633 14.08C86.0578 14.1797 86.1128 14.3103 86.1128 14.4633V15.5684C86.1128 15.6716 86.0802 15.9844 85.7055 16.0531C85.6591 16.0617 85.6058 16.0669 85.5473 16.0669C85.5473 16.0669 85.4562 16.0669 85.4305 16.0634C85.2156 16.0445 82.9297 15.7816 80.2931 15.7816C76.6391 15.7816 74.7398 17.3405 74.7398 20.6491V23.5503C74.7398 26.9672 76.9983 28.3559 79.9631 28.3559C82.2972 28.3559 83.5691 28.1308 83.5691 28.1308V23.9147H81.9878C81.6681 23.9147 81.2745 23.6809 81.2745 23.2856C81.2745 22.8903 81.2694 22.8714 81.2694 22.3558C81.2694 21.8402 81.6784 21.6374 81.9878 21.6374H85.4373C85.855 21.6374 86.1334 21.988 86.1334 22.3558' fill='currentColor'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='222.992' height='44' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+}
+
+/* ====================================== */
+/* LOGO UTILITY CLASSES                   */
+/* ====================================== */
+
+/* Logo icon - 44x44 geometric icon only */
+.logo-icon-bg {
+  background-image: var(--logo-icon);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 44px;
+  height: 44px;
+}
+
+/* Logo full - 223x44 icon + text */
+.logo-full-bg {
+  background-image: var(--logo-full);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 223px;
+  height: 44px;
+}

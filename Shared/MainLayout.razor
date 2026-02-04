@@ -1,0 +1,33 @@
+@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div class="eg-dashboard-scope">
+    <div class="dashboard-container-mud">
+        <LeftNav />
+
+        <main class="main-content-mud">
+            <TopNav />
+            @Body
+        </main>
+    </div>
+</div>
+
+<style>
+    .eg-dashboard-scope .dashboard-container-mud {
+        display: flex;
+        min-height: 100vh;
+        width: 100%;
+    }
+
+    .eg-dashboard-scope .main-content-mud {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: var(--surface-container);
+    }
+</style>

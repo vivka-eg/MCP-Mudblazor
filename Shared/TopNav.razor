@@ -1,0 +1,90 @@
+<!-- Top Navigation Bar -->
+<div class="eg-dashboard-scope">
+    <nav class="top-nav-mud">
+        <div class="nav-container-mud">
+            <!-- Logo and Brand -->
+            <div class="nav-brand-mud">
+                <svg class="brand-logo-mud" width="40" height="40" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="EG Brandsync">
+                    <path d="M35.2 0.128906H8.8C4.01109 0.128906 0.128906 4.01109 0.128906 8.8V35.2C0.128906 39.9889 4.01109 43.8711 8.8 43.8711H35.2C39.9889 43.8711 43.8711 39.9889 43.8711 35.2V8.8C43.8711 4.01109 39.9889 0.128906 35.2 0.128906Z" fill="white"/>
+                    <path d="M35.2 0.257812C39.9094 0.257812 43.7422 4.08891 43.7422 8.8V35.2C43.7422 39.9094 39.9111 43.7422 35.2 43.7422H8.8C4.09063 43.7422 0.257812 39.9111 0.257812 35.2V8.8C0.257812 4.08891 4.08891 0.257812 8.8 0.257812H35.2ZM35.2 0H8.8C3.93938 0 0 3.93938 0 8.8V35.2C0 40.0606 3.93938 44 8.8 44H35.2C40.0606 44 44 40.0606 44 35.2V8.8C44 3.93938 40.0606 0 35.2 0Z" fill="#E8EAEE"/>
+                    <path d="M18.6037 21.5067L21.5067 18.6037C21.7748 18.3356 22.2097 18.3356 22.4795 18.6037L25.3962 21.5205C25.6644 21.7886 25.6644 22.2251 25.3962 22.4933L22.4933 25.3962C22.2251 25.6644 21.7886 25.6644 21.5205 25.3962L18.6037 22.4795C18.3356 22.2114 18.3356 21.7748 18.6037 21.5067Z" fill="#57B1FF"/>
+                    <path d="M15.6423 12.6586L6.79249 21.5084C6.52437 21.7766 6.52437 22.2114 6.79249 22.4813L9.82781 25.5166C10.0959 25.7847 10.5308 25.7847 10.8006 25.5166L19.6505 16.6667C19.9186 16.3986 19.9186 15.962 19.6505 15.6939L16.6151 12.6586C16.347 12.3905 15.9105 12.3905 15.6423 12.6586Z" fill="#57B1FF"/>
+                    <path d="M28.3559 31.3414L37.2161 22.4813C37.4842 22.2131 37.4842 21.7766 37.2161 21.5084L34.1808 18.4731C33.9127 18.205 33.4778 18.205 33.208 18.4731L24.3478 27.3333C24.0797 27.6014 24.0797 28.038 24.3478 28.3061L27.3831 31.3414C27.6513 31.6095 28.0878 31.6095 28.3559 31.3414Z" fill="#57B1FF"/>
+                    <path d="M28.3577 12.6586L37.2075 21.5084C37.4756 21.7766 37.4756 22.2114 37.2075 22.4813L34.1722 25.5166C33.9041 25.7847 33.4692 25.7847 33.1994 25.5166L24.3495 16.6667C24.0814 16.3986 24.0814 15.962 24.3495 15.6939L27.3848 12.6586C27.653 12.3905 28.0895 12.3905 28.3577 12.6586Z" fill="#1B85FF"/>
+                    <path d="M15.6441 31.3414L6.78392 22.4813C6.51579 22.2131 6.51579 21.7766 6.78392 21.5084L9.81923 18.4731C10.0874 18.205 10.5222 18.205 10.792 18.4731L19.6522 27.3333C19.9203 27.6014 19.9203 28.038 19.6522 28.3061L16.6169 31.3414C16.3488 31.6095 15.9122 31.6095 15.6441 31.3414Z" fill="#1B85FF"/>
+                </svg>
+                <MudText Typo="Typo.h6" Class="brand-name-mud">EG Brandsync</MudText>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="nav-links-mud">
+                <MudLink Href="#" Class="@GetNavLinkClass("home")" OnClick="@(() => SetActive("home"))">Home</MudLink>
+                <MudLink Href="#" Class="@GetNavLinkClass("about")" OnClick="@(() => SetActive("about"))">About</MudLink>
+                <MudLink Href="#" Class="@GetNavLinkClass("statistics")" OnClick="@(() => SetActive("statistics"))">Statistics</MudLink>
+                <MudLink Href="#" Class="@GetNavLinkClass("pricing")" OnClick="@(() => SetActive("pricing"))">Pricing</MudLink>
+            </div>
+
+            <!-- Navigation Actions -->
+            <div class="nav-actions-mud">
+                <!-- Search -->
+                <div class="top-nav-search-container-mud">
+                    <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Small" Class="search-icon-mud" />
+                    <MudTextField T="string"
+                                  Placeholder="Search..."
+                                  Variant="Variant.Text"
+                                  Margin="Margin.Dense"
+                                  Class="search-input-mud"
+                                  Underline="false" />
+                </div>
+
+                <!-- Notification Button -->
+                <MudIconButton Icon="@Icons.Material.Filled.Notifications"
+                               Class="top-nav-icon-btn-mud"
+                               aria-label="Notifications" />
+
+                <!-- Theme Toggle -->
+                <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Filled.DarkMode : Icons.Material.Filled.LightMode)"
+                               OnClick="@ToggleTheme"
+                               Class="top-nav-icon-btn-mud theme-toggle-mud"
+                               aria-label="Toggle theme" />
+
+                <!-- User Avatar with Dropdown -->
+                <MudMenu AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
+                    <ActivatorContent>
+                        <MudAvatar Class="user-avatar-mud" Size="Size.Small">
+                            <MudImage Src="https://ui-avatars.com/api/?name=User&background=0073E1&color=fff" Alt="User avatar" />
+                        </MudAvatar>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Person" Class="dropdown-item-mud">Profile</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Settings" Class="dropdown-item-mud">Settings</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.HelpOutline" Class="dropdown-item-mud">Help</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" Class="dropdown-item-mud">Sign out</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+            </div>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private string _activeLink = "home";
+    private bool _isDarkMode = false;
+
+    private string GetNavLinkClass(string link)
+    {
+        return _activeLink == link ? "nav-link-mud active" : "nav-link-mud";
+    }
+
+    private void SetActive(string link)
+    {
+        _activeLink = link;
+    }
+
+    private void ToggleTheme()
+    {
+        _isDarkMode = !_isDarkMode;
+        // In a real app, you'd trigger actual theme switching here
+    }
+}

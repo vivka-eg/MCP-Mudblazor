@@ -1,0 +1,232 @@
+<!-- Left Navigation Drawer -->
+<div class="eg-dashboard-scope">
+    <aside class="left-nav-mud @(_isCollapsed ? "collapsed" : "") @(_isMobileOpen ? "open" : "")">
+        <!-- Header -->
+        <div class="nav-header-mud">
+            <div class="nav-header-content-mud">
+                <svg class="nav-logo-mud" width="@(_isCollapsed ? "44" : "223")" height="44" viewBox="@(_isCollapsed ? "0 0 44 44" : "0 0 223 44")" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="EG Brandsync">
+                    <g clip-path="url(#clip0)">
+                        <path d="M18.6037 21.5067L21.5067 18.6037C21.7748 18.3356 22.2097 18.3356 22.4795 18.6037L25.3962 21.5205C25.6644 21.7886 25.6644 22.2251 25.3962 22.4933L22.4933 25.3962C22.2251 25.6644 21.7886 25.6644 21.5205 25.3962L18.6037 22.4795C18.3356 22.2114 18.3356 21.7748 18.6037 21.5067Z" fill="#57B1FF"/>
+                        <path d="M15.6423 12.6586L6.79249 21.5084C6.52437 21.7766 6.52437 22.2114 6.79249 22.4813L9.82781 25.5166C10.0959 25.7847 10.5308 25.7847 10.8006 25.5166L19.6505 16.6667C19.9186 16.3986 19.9186 15.962 19.6505 15.6939L16.6151 12.6586C16.347 12.3905 15.9105 12.3905 15.6423 12.6586Z" fill="#57B1FF"/>
+                        <path d="M28.3559 31.3414L37.2161 22.4813C37.4842 22.2131 37.4842 21.7766 37.2161 21.5084L34.1808 18.4731C33.9127 18.205 33.4778 18.205 33.208 18.4731L24.3478 27.3333C24.0797 27.6014 24.0797 28.038 24.3478 28.3061L27.3831 31.3414C27.6513 31.6095 28.0878 31.6095 28.3559 31.3414Z" fill="#57B1FF"/>
+                        <path d="M28.3577 12.6586L37.2075 21.5084C37.4756 21.7766 37.4756 22.2114 37.2075 22.4813L34.1722 25.5166C33.9041 25.7847 33.4692 25.7847 33.1994 25.5166L24.3495 16.6667C24.0814 16.3986 24.0814 15.962 24.3495 15.6939L27.3848 12.6586C27.653 12.3905 28.0895 12.3905 28.3577 12.6586Z" fill="#1B85FF"/>
+                        <path d="M15.6441 31.3414L6.78392 22.4813C6.51579 22.2131 6.51579 21.7766 6.78392 21.5084L9.81923 18.4731C10.0874 18.205 10.5222 18.205 10.792 18.4731L19.6522 27.3333C19.9203 27.6014 19.9203 28.038 19.6522 28.3061L16.6169 31.3414C16.3488 31.6095 15.9122 31.6095 15.6441 31.3414Z" fill="#1B85FF"/>
+                        @if (!_isCollapsed)
+                        {
+                            <g class="logo-text">
+                                <path d="M64.2331 30.6419C62.6072 30.6419 61.3645 30.2947 60.5378 29.6106C59.6991 28.9145 59.2728 27.7922 59.2728 26.2763V17.808C59.2728 16.2903 59.6991 15.168 60.5378 14.4736C61.3628 13.7895 62.6072 13.4424 64.2331 13.4424C68.1209 13.4424 69.4048 13.4819 70.3845 13.5747C70.5959 13.5799 70.7094 13.75 70.7472 13.8067C70.8211 13.9184 70.8589 14.037 70.8589 14.1574V15.2574C70.8589 15.4206 70.8091 15.553 70.7128 15.6492C70.62 15.742 70.4842 15.7953 70.3433 15.7953H64.2555C63.5491 15.7953 62.9991 15.8709 62.6175 16.0188C62.2858 16.1477 62.0778 16.323 61.9781 16.5533C61.8733 16.7974 61.8234 17.1978 61.8234 17.808V20.5906H69.9102C70.1078 20.5906 70.2677 20.6577 70.412 20.8038C70.5564 20.9481 70.6252 21.108 70.6252 21.3056V22.1409C70.6252 22.3386 70.5581 22.4984 70.412 22.6428C70.2677 22.7872 70.1078 22.8559 69.9102 22.8559H61.8234V26.2763C61.8234 26.8881 61.8716 27.2869 61.9781 27.5309C62.0761 27.7613 62.2858 27.9366 62.6175 28.0655C62.9819 28.2064 63.3772 28.2889 64.6422 28.2889H70.3433C70.4859 28.2889 70.6217 28.3422 70.7145 28.435C70.8108 28.5313 70.8606 28.6636 70.8606 28.8269V29.9492C70.8606 30.0695 70.8228 30.1881 70.7489 30.2999C70.7111 30.3566 70.5977 30.5267 70.3777 30.5319C69.6197 30.6024 68.09 30.6419 66.0773 30.6419H64.2348H64.2331Z" fill="currentColor"/>
+                                <path d="M86.1352 22.3541V29.6038C86.1352 30.0678 85.8842 30.1538 85.7777 30.1847C85.7227 30.2019 83.4814 30.6969 79.8445 30.6969C75.5184 30.6969 72.1823 28.227 72.1823 23.7944C72.1823 23.3819 72.1772 23.2306 72.1772 20.4944C72.1772 14.7417 76.627 13.4131 80.0937 13.4131C83.2184 13.4131 84.3219 13.6795 85.5009 13.8583C85.6127 13.8755 85.7141 13.9081 85.7983 13.9545C85.8619 13.9889 85.9169 14.0319 85.9633 14.08C86.0578 14.1797 86.1128 14.3103 86.1128 14.4633V15.5684C86.1128 15.6716 86.0802 15.9844 85.7055 16.0531C85.6591 16.0617 85.6058 16.0669 85.5473 16.0669C85.5473 16.0669 85.4562 16.0669 85.4305 16.0634C85.2156 16.0445 82.9297 15.7816 80.2931 15.7816C76.6391 15.7816 74.7398 17.3405 74.7398 20.6491V23.5503C74.7398 26.9672 76.9983 28.3559 79.9631 28.3559C82.2972 28.3559 83.5691 28.1308 83.5691 28.1308V23.9147H81.9878C81.6681 23.9147 81.2745 23.6809 81.2745 23.2856C81.2745 22.8903 81.2694 22.8714 81.2694 22.3558C81.2694 21.8402 81.6784 21.6374 81.9878 21.6374H85.4373C85.855 21.6374 86.1334 21.988 86.1334 22.3558" fill="currentColor"/>
+                            </g>
+                        }
+                    </g>
+                    <defs>
+                        <clipPath id="clip0">
+                            <rect width="222.992" height="44" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+                @if (!_isCollapsed)
+                {
+                    <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Filled.DarkMode : Icons.Material.Filled.LightMode)"
+                                   OnClick="@ToggleTheme"
+                                   Class="theme-toggle-btn-mud"
+                                   Size="Size.Small"
+                                   aria-label="Toggle theme" />
+                }
+            </div>
+        </div>
+
+        <!-- Main Menu Toggle -->
+        <div class="collapse-toggle-mud" @onclick="ToggleCollapse" role="button" tabindex="0">
+            @if (!_isCollapsed)
+            {
+                <span class="menu-text-mud">Main Menu</span>
+            }
+            <span class="chevron-container-mud">
+                <MudIcon Icon="@(_isCollapsed ? Icons.Material.Filled.ChevronRight : Icons.Material.Filled.ChevronLeft)" Size="Size.Small" />
+            </span>
+        </div>
+
+        <!-- Search -->
+        <div class="left-nav-search-container-mud">
+            <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Small" Class="left-nav-search-icon-mud" />
+            @if (!_isCollapsed)
+            {
+                <MudTextField T="string"
+                              Placeholder="Search..."
+                              Variant="Variant.Text"
+                              Margin="Margin.Dense"
+                              Class="left-nav-search-input-mud"
+                              Underline="false" />
+            }
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu-mud">
+            <!-- Facility Section -->
+            <div class="nav-section-mud @(_expandedSections.Contains("facility") ? "expanded" : "")">
+                <MudButton Variant="Variant.Text"
+                           Class="@GetNavItemClass("facility", true)"
+                           OnClick="@(() => ToggleSection("facility"))"
+                           FullWidth="true"
+                           title="Facility">
+                    <MudIcon Icon="@Icons.Material.Filled.Business" Class="nav-icon-mud" />
+                    @if (!_isCollapsed)
+                    {
+                        <span class="nav-label-mud">Facility</span>
+                        <MudIcon Icon="@Icons.Material.Filled.ExpandMore" Class="expand-icon-mud" />
+                    }
+                </MudButton>
+                @if (_expandedSections.Contains("facility") && !_isCollapsed)
+                {
+                    <div class="nav-submenu-mud">
+                        <MudButton Variant="Variant.Text" Href="/property" Class="@GetNavItemClass("property", false, true)" FullWidth="true" title="Property">
+                            <span class="nav-label-mud">Property</span>
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" Href="#" Class="@GetNavItemClass("installation", false, false)" FullWidth="true" title="Installation">
+                            <span class="nav-label-mud">Installation</span>
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" Href="#" Class="@GetNavItemClass("site", false, false)" FullWidth="true" title="Site">
+                            <span class="nav-label-mud">Site</span>
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" Href="#" Class="@GetNavItemClass("building", false, false)" FullWidth="true" title="Building">
+                            <span class="nav-label-mud">Building</span>
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" Href="#" Class="@GetNavItemClass("room", false, false)" FullWidth="true" title="Room">
+                            <span class="nav-label-mud">Room</span>
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" Href="#" Class="@GetNavItemClass("object", false, false)" FullWidth="true" title="Object">
+                            <span class="nav-label-mud">Object</span>
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" Href="#" Class="@GetNavItemClass("sections", false, false)" FullWidth="true" title="Sections">
+                            <span class="nav-label-mud">Sections</span>
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" Href="#" Class="@GetNavItemClass("furnishing", false, false)" FullWidth="true" title="Furnishing">
+                            <span class="nav-label-mud">Furnishing</span>
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" Href="#" Class="@GetNavItemClass("inventory", false, false)" FullWidth="true" title="Inventory">
+                            <span class="nav-label-mud">Inventory</span>
+                        </MudButton>
+                    </div>
+                }
+            </div>
+
+            <!-- Map Section -->
+            <div class="nav-section-mud @(_expandedSections.Contains("map") ? "expanded" : "")">
+                <MudButton Variant="Variant.Text"
+                           Class="@GetNavItemClass("map", true)"
+                           OnClick="@(() => ToggleSection("map"))"
+                           FullWidth="true"
+                           title="Map">
+                    <MudIcon Icon="@Icons.Material.Filled.Map" Class="nav-icon-mud" />
+                    @if (!_isCollapsed)
+                    {
+                        <span class="nav-label-mud">Map</span>
+                        <MudIcon Icon="@Icons.Material.Filled.ExpandMore" Class="expand-icon-mud" />
+                    }
+                </MudButton>
+            </div>
+
+            <!-- Activity Section -->
+            <div class="nav-section-mud @(_expandedSections.Contains("activity") ? "expanded" : "")">
+                <MudButton Variant="Variant.Text"
+                           Class="@GetNavItemClass("activity", true)"
+                           OnClick="@(() => ToggleSection("activity"))"
+                           FullWidth="true"
+                           title="Activity">
+                    <MudIcon Icon="@Icons.Material.Filled.AssignmentTurnedIn" Class="nav-icon-mud" />
+                    @if (!_isCollapsed)
+                    {
+                        <span class="nav-label-mud">Activity</span>
+                        <MudIcon Icon="@Icons.Material.Filled.ExpandMore" Class="expand-icon-mud" />
+                    }
+                </MudButton>
+            </div>
+
+            <!-- Agent Section -->
+            <div class="nav-section-mud @(_expandedSections.Contains("agent") ? "expanded" : "")">
+                <MudButton Variant="Variant.Text"
+                           Class="@GetNavItemClass("agent", true)"
+                           OnClick="@(() => ToggleSection("agent"))"
+                           FullWidth="true"
+                           title="Agent">
+                    <MudIcon Icon="@Icons.Material.Filled.Person" Class="nav-icon-mud" />
+                    @if (!_isCollapsed)
+                    {
+                        <span class="nav-label-mud">Agent</span>
+                        <MudIcon Icon="@Icons.Material.Filled.ExpandMore" Class="expand-icon-mud" />
+                    }
+                </MudButton>
+            </div>
+
+            <!-- Agreement Section -->
+            <div class="nav-section-mud @(_expandedSections.Contains("agreement") ? "expanded" : "")">
+                <MudButton Variant="Variant.Text"
+                           Class="@GetNavItemClass("agreement", true)"
+                           OnClick="@(() => ToggleSection("agreement"))"
+                           FullWidth="true"
+                           title="Agreement">
+                    <MudIcon Icon="@Icons.Material.Filled.Description" Class="nav-icon-mud" />
+                    @if (!_isCollapsed)
+                    {
+                        <span class="nav-label-mud">Agreement</span>
+                        <MudIcon Icon="@Icons.Material.Filled.ExpandMore" Class="expand-icon-mud" />
+                    }
+                </MudButton>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    @if (_isMobileOpen)
+    {
+        <div class="mobile-overlay-mud" @onclick="CloseMobileNav"></div>
+    }
+</div>
+
+@code {
+    private bool _isCollapsed = false;
+    private bool _isDarkMode = false;
+    private bool _isMobileOpen = false;
+    private HashSet<string> _expandedSections = new() { "facility" }; // Facility expanded by default
+    private string _activeItem = "property";
+
+    private void ToggleCollapse()
+    {
+        _isCollapsed = !_isCollapsed;
+    }
+
+    private void ToggleTheme()
+    {
+        _isDarkMode = !_isDarkMode;
+        // In a real app, trigger actual theme switching
+    }
+
+    private void ToggleSection(string section)
+    {
+        if (_expandedSections.Contains(section))
+            _expandedSections.Remove(section);
+        else
+            _expandedSections.Add(section);
+    }
+
+    private void CloseMobileNav()
+    {
+        _isMobileOpen = false;
+    }
+
+    private string GetNavItemClass(string item, bool isParent, bool isActive = false)
+    {
+        var classes = new List<string> { "nav-item-mud" };
+
+        if (isParent)
+            classes.Add("nav-parent-mud");
+        else
+            classes.Add("nav-child-mud");
+
+        if (isActive || _activeItem == item)
+            classes.Add("active");
+
+        return string.Join(" ", classes);
+    }
+}
