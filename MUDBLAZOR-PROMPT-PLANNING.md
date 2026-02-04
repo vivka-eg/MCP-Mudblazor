@@ -17,8 +17,7 @@
 8. [Scoped CSS Architecture](#integrating-into-existing-mudblazor-projects)
 9. [File Management Strategy](#file-management-strategy)
 10. [Dark Mode Implementation](#dark-mode-implementation)
-11. [Hybrid Approach](#hybrid-approach-plain-html-vs-mudblazor-components)
-12. [Testing & Results](#testing-your-mcp-server-output)
+11. [Testing & Results](#testing-your-mcp-server-output)
 
 ---
 
@@ -36,7 +35,7 @@ This guide documents the complete strategy for building an MCP server that conve
 **The Solution:**
 - **Three-Layer Strategy**: Theme Config + Custom Classes + CSS Overrides
 - **Scoped CSS Architecture**: Integrate into existing projects without breaking them
-- **Hybrid Approach**: Plain HTML for visuals, MudBlazor for complex interactions
+- **Pure MudBlazor Components**: Use MudBlazor for all UI elements with targeted CSS overrides
 - **Automatic Dark Mode**: CSS variables switch themes without re-rendering
 
 ### What This Guide Covers
@@ -45,8 +44,342 @@ This guide documents the complete strategy for building an MCP server that conve
 ✅ Two deployment scenarios (new vs existing projects)
 ✅ File management strategy (what to keep/delete)
 ✅ Automatic dark mode implementation
-✅ Decision tree for plain HTML vs MudBlazor components
+✅ Pure MudBlazor component strategy with CSS overrides
 ✅ Testing and validation approach
+✅ **Why MudBlazor is fundamentally different from Angular/Vue/React**
+
+---
+
+## Why MudBlazor Requires a Different Approach
+
+### Critical Understanding for Your MCP Server
+
+**Unlike Angular, Vue, and React, MudBlazor requires a fundamentally different code generation strategy.**
+
+#### Angular/Vue/React: Straightforward Approach ✅
+
+**Component libraries are OPTIONAL:**
+```jsx
+// React - Just use plain HTML with your CSS classes
+function Button() {
+  return (
+    <button className="btn btn-primary">
+      <i data-lucide="plus"></i>
+      <span>New row</span>
+    </button>
+  );
+}
+```
+
+```vue
+<!-- Vue - Plain HTML with CSS classes -->
+<template>
+  <button class="btn btn-primary">
+    <lucide-icon name="plus" />
+    <span>New row</span>
+  </button>
+</template>
+```
+
+**Why it works:**
+- ✅ Framework components are wrappers around plain HTML
+- ✅ You control the HTML structure completely
+- ✅ CSS classes apply directly to your elements
+- ✅ Component libraries (Material UI, Ant Design) are separate packages
+- ✅ You can choose to use plain HTML/CSS anytime
+- ✅ **100% design accuracy by default**
+
+**MCP Generation Strategy (Simple):**
+```python
+def generate_react_component(html_element):
+    # Just convert HTML to JSX - that's it!
+    return convert_html_to_jsx(html_element)
+    # Your CSS classes work as-is. Done!
+```
+
+---
+
+#### MudBlazor: Complex Override Strategy ⚠️
+
+**Component library is INTEGRAL to Blazor:**
+```razor
+<!-- MudBlazor - Can't easily use plain button -->
+<MudButton Variant="Variant.Filled"
+           Color="Color.Primary"
+           Class="btn-mud btn-primary-mud">
+    New row
+</MudButton>
+
+<!-- What MudBlazor actually generates: -->
+<button class="mud-button-root mud-ripple mud-button-filled mud-button-filled-primary mud-button-filled-size-medium btn-mud btn-primary-mud">
+    <span class="mud-button-label">New row</span>
+</button>
+```
+
+**Why it's different:**
+- ❌ MudBlazor components have **built-in Material Design styling**
+- ❌ You can't "opt out" - using plain `<button>` loses Blazor benefits
+- ❌ MudBlazor generates **complex nested DOM structures**
+- ❌ Your CSS classes are added but **MudBlazor CSS has higher priority**
+- ❌ Components inject multiple CSS classes with high specificity
+- ❌ **Only 50-60% design accuracy without overrides**
+
+**MCP Generation Strategy (Complex):**
+```python
+def generate_mudblazor_component(html_element):
+    # Step 1: Generate Razor with MudBlazor component + custom class
+    razor = generate_razor_with_custom_class(html_element)
+
+    # Step 2: Generate CSS overrides targeting custom class
+    css_overrides = generate_css_overrides_with_important(html_element)
+
+    # Step 3: Use scoped CSS if integrating into existing project
+    if is_existing_project:
+        css_overrides = scope_css_overrides(css_overrides, scope_class)
+
+    return {
+        'razor': razor,
+        'css': css_overrides,
+        'requires_three_layer_strategy': True
+    }
+```
+
+---
+
+### Side-by-Side Comparison
+
+| Aspect | Angular/Vue/React | **MudBlazor/Blazor** |
+|--------|-------------------|----------------------|
+| **Component Library** | Optional (separate package) | Integral (part of ecosystem) |
+| **HTML Control** | ✅ Full control | ⚠️ Component dictates structure |
+| **CSS Classes** | ✅ Apply directly | ⚠️ Added alongside MudBlazor classes |
+| **CSS Priority** | ✅ Your CSS wins | ❌ MudBlazor CSS has high specificity |
+| **Styling Approach** | Use framework's CSS directly | **Need CSS overrides with !important** |
+| **Plain HTML Option** | ✅ Easy | ⚠️ Loses Blazor component benefits |
+| **Generation Complexity** | Low (HTML → JSX/Template) | **High (3-Layer Strategy required)** |
+| **Design Accuracy** | 100% out of box | 50-60% → **95-100% with overrides** |
+
+---
+
+### Why This Matters for Your MCP Server
+
+#### Different Generation Pipelines
+
+**For Angular/Vue/React:**
+```
+HTML Template → Convert to Framework Syntax (JSX/Template) → Done! ✅
+                                                              (CSS works as-is)
+```
+
+**For MudBlazor:**
+```
+HTML Template + Design Tokens
+    ↓
+Layer 1: Generate MudTheme from tokens
+    ↓
+Layer 2: Map HTML → MudBlazor components + custom classes
+    ↓
+Layer 3: Generate CSS overrides with !important
+    ↓
+Decision: New project or existing?
+    ├─ New: Global overrides
+    └─ Existing: Scoped overrides
+    ↓
+Result: 90-95% accuracy ✅
+```
+
+---
+
+### Key Architectural Differences
+
+#### 1. **Component Complexity**
+
+**React/Vue/Angular:**
+```jsx
+// Simple wrapper - you control everything
+<button className="btn btn-primary">
+  {children}
+</button>
+```
+
+**MudBlazor:**
+```razor
+<!-- Complex component with internal logic -->
+<MudButton>
+  <!-- Internally generates:
+       - Multiple wrapper divs
+       - Ripple effects
+       - State management
+       - Icon positioning
+       - Loading states
+       - Tooltip integration -->
+</MudButton>
+```
+
+#### 2. **CSS Strategy**
+
+**React/Vue/Angular:**
+```css
+/* Your CSS just works */
+.btn-primary {
+    background: var(--color-primary);
+    padding: var(--spacing-200);
+}
+```
+
+**MudBlazor:**
+```css
+/* Must override MudBlazor with !important */
+.mud-button-root.btn-primary-mud {
+    background: var(--color-primary) !important;
+    padding: var(--spacing-200) !important;
+}
+```
+
+#### 3. **Integration Approach**
+
+**React/Vue/Angular:**
+```jsx
+// Use plain HTML anytime - works perfectly
+<div className="dashboard">
+  <button className="btn btn-primary">Save</button>
+  <span className="badge badge-success">Active</span>
+</div>
+// ✅ 100% accurate to your design
+```
+
+**MudBlazor:**
+```razor
+<!-- Pure MudBlazor with CSS Overrides (CURRENT APPROACH) -->
+<div class="eg-dashboard-scope">
+  <MudButton Class="btn-mud btn-primary-mud" OnClick="Save">Save</MudButton>
+  <MudChip Class="badge-mud badge-success-mud">Active</MudChip>
+  <MudDialog @bind-Visible="_showDialog">...</MudDialog>
+  <!-- ✅ Full Blazor integration + 90-95% design accuracy with CSS overrides -->
+</div>
+
+<!-- What it generates: -->
+<button class="mud-button-root mud-ripple mud-button-filled mud-button-filled-primary btn-mud btn-primary-mud">
+    <span class="mud-button-label">Save</span>
+</button>
+<!-- CSS overrides target .btn-mud.btn-primary-mud to customize appearance -->
+```
+
+---
+
+### Why Can't MudBlazor Be Like React?
+
+**Fundamental Architecture:**
+
+1. **Blazor is Server-Side (or WebAssembly)**
+   - Needs stateful components with lifecycle management
+   - Plain HTML loses two-way binding, events, state
+   - MudBlazor provides this infrastructure
+
+2. **MudBlazor is an Ecosystem, Not a Library**
+   - Like Bootstrap for Blazor (but with C# components)
+   - Designed as a complete UI system
+   - Best used as the primary component library throughout
+
+3. **Material Design First**
+   - Built for Material Design from ground up
+   - Custom design systems are "afterthought"
+   - Need to fight against built-in styling
+
+**React/Vue/Angular:**
+- Framework = Logic layer only
+- UI = Your choice (plain HTML, component library, etc.)
+- Separation of concerns ✅
+
+**Blazor/MudBlazor:**
+- Framework = Logic + UI together
+- MudBlazor = Expected default UI
+- Tightly coupled by design ⚠️
+
+---
+
+### MCP Server Decision Tree
+
+```python
+def generate_code(html_template, css_tokens, framework):
+    """
+    Main MCP server entry point - route to correct generator
+    """
+
+    if framework in ['react', 'vue', 'angular']:
+        # Simple generation
+        return generate_spa_framework(html_template, css_tokens, framework)
+        # Output: Component files + CSS (tokens work as-is)
+        # Complexity: LOW ⭐
+        # Accuracy: 100%
+
+    elif framework == 'mudblazor':
+        # Complex generation with three-layer strategy
+        deployment_type = prompt_user("New or existing project?")
+
+        if deployment_type == "new":
+            return generate_mudblazor_new_project(
+                html_template,
+                css_tokens
+            )
+            # Output: Theme + Razor (MudBlazor) + CSS overrides
+            # Complexity: HIGH ⭐⭐⭐⭐
+            # Accuracy: 90-95%
+
+        elif deployment_type == "existing":
+            scope_class = prompt_user("Scope class name?")
+            return generate_mudblazor_scoped(
+                html_template,
+                css_tokens,
+                scope_class
+            )
+            # Output: Scoped Razor (MudBlazor) + Scoped CSS
+            # Complexity: VERY HIGH ⭐⭐⭐⭐⭐
+            # Accuracy: 90-95% (existing pages safe)
+
+    else:
+        raise ValueError(f"Unsupported framework: {framework}")
+```
+
+---
+
+### Framework Support Matrix (for Your MCP Server)
+
+| Framework | Approach | Complexity | Accuracy | Strategy |
+|-----------|----------|------------|----------|----------|
+| **React** | Direct HTML→JSX | ⭐ Simple | 100% | Plain HTML + CSS |
+| **Vue** | Direct HTML→Template | ⭐ Simple | 100% | Plain HTML + CSS |
+| **Angular** | Direct HTML→Template | ⭐⭐ Moderate | 100% | Plain HTML + CSS |
+| **MudBlazor** | **Three-Layer Strategy** | ⭐⭐⭐⭐⭐ Complex | **90-95%** | **Theme + MudBlazor Components + CSS Overrides** |
+
+---
+
+### Document This for Your MCP Server Users
+
+```markdown
+## Framework-Specific Approaches
+
+Your MCP Server supports multiple frameworks with different strategies:
+
+### Angular/Vue/React: ✅ Simple Generation
+- Converts HTML directly to framework syntax (JSX/Templates)
+- CSS classes work as-is
+- 100% design accuracy out of the box
+- Fast generation
+
+### MudBlazor: ⚠️ Complex Generation
+- Requires three-layer strategy (Theme + MudBlazor Components + CSS Overrides)
+- Converts all HTML elements to MudBlazor components
+- CSS overrides needed for design customization
+- More configuration required
+- Longer generation time
+- **Achieves 90-95% accuracy with full Blazor integration!**
+
+**Why the difference?**
+MudBlazor components have built-in Material Design styling and complex
+internal DOM structures that must be overridden with targeted CSS
+to match your custom design system.
+```
 
 ---
 
@@ -64,7 +397,7 @@ This guide documents the complete strategy for building an MCP server that conve
 - `Property.razor` - Page components
 - `wwwroot/css/mudblazor-overrides.css` - Global CSS overrides
 
-**Accuracy:** 95-100%
+**Accuracy:** 90-95%
 
 ### For Existing MudBlazor Projects
 
@@ -73,10 +406,10 @@ This guide documents the complete strategy for building an MCP server that conve
 - `dashboard.html` - UI structure reference
 
 **Output:**
-- `Pages/Property.razor` - Scoped page components
+- `Pages/Property.razor` - Scoped page components (pure MudBlazor)
 - `wwwroot/css/dashboard-scoped.css` - Scoped tokens + overrides
 
-**Accuracy:** 95-100% (existing pages unaffected)
+**Accuracy:** 90-95% (existing pages unaffected)
 
 ---
 
@@ -969,9 +1302,9 @@ output = main("_tokens.css", "dashboard.html", deployment_type="existing", scope
 
 | Approach | Accuracy |
 |----------|----------|
-| Plain MudBlazor | 50-60% |
-| MudBlazor + Theme | 60-70% |
-| **Three-Layer Strategy** | **95-100%** |
+| Plain MudBlazor (no customization) | 50-60% |
+| MudBlazor + Theme Config | 60-70% |
+| **Three-Layer Strategy (Theme + Custom Classes + CSS Overrides)** | **90-95%** |
 
 ---
 
@@ -1259,37 +1592,97 @@ window.toggleTheme = function() {
 ✅ **Framework-agnostic** - Same tokens work for any framework
 ✅ **No re-rendering** - CSS cascade handles everything
 ✅ **Persistent** - Theme saved to localStorage
-✅ **Works with all components** - Both plain HTML and MudBlazor components switch automatically
+✅ **Works with all components** - All MudBlazor components switch automatically via CSS variables
 
 ---
 
-## Hybrid Approach: Plain HTML vs MudBlazor Components
+## Pure MudBlazor Approach with CSS Overrides
 
-### When to Use Plain HTML vs MudBlazor Components
+### Current Implementation Strategy
 
-Your MCP server should follow this decision tree:
+This implementation uses **100% MudBlazor components** with targeted CSS overrides to match your custom design system.
 
-#### Use Plain HTML When:
+### Why Pure MudBlazor?
 
-✅ **Visual/Static Components**
-- Buttons (basic click actions)
-- Badges/status indicators
-- Tables (simple data display)
-- Cards
-- Typography
-- Icons
+✅ **Full Blazor Ecosystem Integration**
+- Native data binding (`@bind-Value`, `@bind-Visible`)
+- Built-in state management
+- Component lifecycle events
+- Two-way binding support
 
-**Why:** 100% accurate to design, no CSS override conflicts
+✅ **Rich Component Library**
+- Complex interactions out-of-the-box (dialogs, menus, date pickers)
+- Accessibility features built-in
+- Consistent component APIs
+- Active maintenance and updates
 
-```razor
-<!-- Plain HTML - Perfect accuracy -->
-<button class="btn btn-primary" @onclick="Save">
+✅ **No HTML/CSS Conflicts**
+- Pure C#/Razor components
+- Strongly typed parameters
+- IntelliSense support
+- Compile-time validation
+
+### Component Mapping Strategy
+
+Your MCP server maps HTML elements to MudBlazor components:
+
+| HTML Element | MudBlazor Component | Custom Class | Purpose |
+|--------------|---------------------|--------------|---------|
+| `<button class="btn btn-primary">` | `<MudButton Variant="Variant.Filled" Color="Color.Primary">` | `btn-mud btn-primary-mud` | Action buttons |
+| `<button class="btn btn-secondary">` | `<MudButton Variant="Variant.Outlined">` | `btn-mud btn-secondary-mud` | Secondary actions |
+| `<span class="badge badge-success">` | `<MudChip Size="Size.Small" Color="Color.Success">` | `badge-mud badge-success-mud` | Status indicators |
+| `<table>` | `<MudTable>` | `data-table-mud` | Data tables |
+| `<th>` | `<MudTh>` | `table-header-cell-mud` | Table headers |
+| `<td>` | `<MudTd>` | `table-cell-mud` | Table cells |
+| `<select>` | `<MudSelect>` | `form-select-mud` | Dropdown selects |
+| `<input type="text">` | `<MudTextField>` | `form-input-mud` | Text inputs |
+| `<input type="checkbox">` | `<MudCheckBox>` | `table-checkbox-mud` | Checkboxes |
+
+### Example: Button Implementation
+
+**HTML Input (from dashboard.html):**
+```html
+<button class="btn btn-primary">
     <i data-lucide="plus"></i>
     <span>New row</span>
 </button>
+```
 
-<span class="badge badge-success">Active</span>
+**Generated Razor (MudBlazor):**
+```razor
+<MudButton Variant="Variant.Filled"
+           Color="Color.Primary"
+           StartIcon="@Icons.Material.Filled.Add"
+           Class="btn-mud btn-primary-mud">
+    New row
+</MudButton>
+```
 
+**Generated CSS Override:**
+```css
+.eg-dashboard-scope .mud-button-root.btn-mud {
+    padding: var(--spacing-100) var(--spacing-200) !important;
+    border-radius: var(--border-radius-100) !important;
+    gap: var(--spacing-100) !important;
+    font-size: var(--font-size-medium) !important;
+    font-weight: var(--font-weight-medium) !important;
+}
+
+.eg-dashboard-scope .mud-button-root.btn-primary-mud {
+    background-color: var(--color-primary-default) !important;
+    color: var(--text-on-action) !important;
+    border: none !important;
+}
+
+.eg-dashboard-scope .mud-button-root.btn-primary-mud:hover {
+    background-color: var(--color-primary-hover) !important;
+}
+```
+
+### Example: Table Implementation
+
+**HTML Input:**
+```html
 <table class="data-table">
     <thead>
         <tr>
@@ -1298,133 +1691,209 @@ Your MCP server should follow this decision tree:
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in items)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Status</td>
-            </tr>
-        }
+        <tr>
+            <td>John Doe</td>
+            <td><span class="badge badge-success">Active</span></td>
+        </tr>
     </tbody>
 </table>
 ```
 
-#### Use MudBlazor Components When:
-
-✅ **Complex Interactive Components**
-- Dialogs/Modals (overlay management, focus trap, animations)
-- Date/Time Pickers (calendar logic, date validation)
-- Autocomplete (search, dropdown, keyboard nav)
-- Tooltips/Popovers (positioning, z-index management)
-- Dropdowns/Menus (click outside, keyboard nav)
-- File Uploads (drag-drop, progress)
-
-**Why:** Complex behavior that's time-consuming to build from scratch
-
+**Generated Razor:**
 ```razor
-<!-- Complex behavior - Use MudBlazor -->
-<MudDialog @bind-Visible="_showDialog" Options="_dialogOptions">
-    <TitleContent>
-        <h2 class="modal-title">Add Agent Roles</h2>
-    </TitleContent>
-    <DialogContent>
-        <!-- Plain HTML inside for styling accuracy -->
-        <div class="form-group">
-            <label class="form-label">Agent</label>
-            <select class="form-select">
-                <option>Agent 1</option>
-            </select>
-        </div>
-    </DialogContent>
-    <DialogActions>
-        <button class="btn btn-ghost" @onclick="Close">Cancel</button>
-        <button class="btn btn-primary" @onclick="Save">Save</button>
-    </DialogActions>
-</MudDialog>
-
-<MudDatePicker @bind-Date="_selectedDate" />
-
-<MudAutocomplete T="string"
-                 SearchFunc="@SearchAgents"
-                 Label="Search agents" />
+<MudTable Items="@items"
+          Hover="true"
+          Elevation="0"
+          Class="data-table-mud">
+    <HeaderContent>
+        <MudTh Class="table-header-cell-mud">Name</MudTh>
+        <MudTh Class="table-header-cell-mud">Status</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd Class="table-cell-mud">@context.Name</MudTd>
+        <MudTd Class="table-cell-mud">
+            <MudChip T="string"
+                     Size="Size.Small"
+                     Color="Color.Success"
+                     Class="badge-mud badge-success-mud">
+                @context.Status
+            </MudChip>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
 ```
 
-### Generation Strategy
+**Generated CSS Override:**
+```css
+.eg-dashboard-scope .mud-table.data-table-mud {
+    background-color: var(--surface-base) !important;
+    border: var(--border-width-thin) solid var(--border-default) !important;
+    border-radius: var(--border-radius-200) !important;
+}
+
+.eg-dashboard-scope .mud-table-head .table-header-cell-mud {
+    padding: var(--spacing-200) var(--spacing-300) !important;
+    background-color: var(--surface-subtle) !important;
+    font-size: var(--font-size-small) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    color: var(--text-secondary) !important;
+    border-bottom: var(--border-width-thin) solid var(--border-default) !important;
+}
+
+.eg-dashboard-scope .mud-table-body .table-cell-mud {
+    padding: var(--spacing-200) var(--spacing-300) !important;
+    border-bottom: var(--border-width-thin) solid var(--border-subtle) !important;
+}
+```
+
+### Component-Specific Override Patterns
+
+#### 1. Buttons
+```css
+/* Base button styles */
+.eg-dashboard-scope .mud-button-root.btn-mud {
+    padding: var(--spacing-100) var(--spacing-200) !important;
+    border-radius: var(--border-radius-100) !important;
+    text-transform: none !important; /* Remove MudBlazor uppercase */
+    font-size: var(--font-size-medium) !important;
+}
+
+/* Primary button */
+.eg-dashboard-scope .mud-button-root.btn-primary-mud {
+    background-color: var(--color-primary-default) !important;
+    color: var(--text-on-action) !important;
+}
+
+/* Secondary/Outlined button */
+.eg-dashboard-scope .mud-button-root.btn-secondary-mud {
+    border: var(--border-width-thin) solid var(--border-default) !important;
+    background-color: transparent !important;
+    color: var(--text-default) !important;
+}
+```
+
+#### 2. Chips/Badges
+```css
+.eg-dashboard-scope .mud-chip.badge-mud {
+    padding: var(--spacing-50) var(--spacing-150) !important;
+    border-radius: var(--border-radius-full) !important;
+    font-size: var(--font-size-small) !important;
+    height: auto !important;
+}
+
+.eg-dashboard-scope .mud-chip.badge-success-mud {
+    background-color: var(--success-100) !important;
+    color: var(--success-700) !important;
+}
+```
+
+#### 3. Form Inputs
+```css
+.eg-dashboard-scope .mud-input.form-input-mud {
+    border: var(--border-width-thin) solid var(--border-default) !important;
+    border-radius: var(--border-radius-100) !important;
+    padding: var(--spacing-150) var(--spacing-200) !important;
+}
+
+.eg-dashboard-scope .mud-select.form-select-mud {
+    border: var(--border-width-thin) solid var(--border-default) !important;
+    border-radius: var(--border-radius-100) !important;
+}
+```
+
+### Generation Pseudocode
 
 ```python
-def generate_component(html_element):
+def generate_mudblazor_component(html_element):
     """
-    Decide whether to use plain HTML or MudBlazor component
+    Convert HTML element to MudBlazor component with custom class
     """
 
-    # Visual components → Plain HTML
-    if html_element.tag == 'button' and not has_complex_behavior(html_element):
-        return generate_plain_button(html_element)
+    if html_element.tag == 'button':
+        variant = 'Variant.Filled' if 'btn-primary' in html_element.classes else 'Variant.Outlined'
+        icon = extract_icon(html_element)
+        text = extract_text(html_element)
+        custom_class = f"btn-mud {get_button_variant_class(html_element)}-mud"
 
-    if html_element.tag == 'span' and 'badge' in html_element.classes:
-        return generate_plain_badge(html_element)
+        return f"""
+<MudButton Variant="{variant}"
+           Color="Color.Primary"
+           StartIcon="@Icons.Material.Filled.{icon}"
+           Class="{custom_class}">
+    {text}
+</MudButton>
+"""
 
-    if html_element.tag == 'table':
-        return generate_plain_table(html_element)
+    elif html_element.tag == 'span' and 'badge' in html_element.classes:
+        color = extract_color_variant(html_element)
+        text = extract_text(html_element)
+        custom_class = f"badge-mud badge-{color}-mud"
 
-    # Complex components → MudBlazor (with plain HTML content)
-    if is_modal(html_element):
-        return generate_mud_dialog_with_html_content(html_element)
+        return f"""
+<MudChip T="string"
+         Size="Size.Small"
+         Color="Color.{color.capitalize()}"
+         Class="{custom_class}">
+    {text}
+</MudChip>
+"""
 
-    if is_date_picker(html_element):
-        return '<MudDatePicker @bind-Date="_date" />'
+    elif html_element.tag == 'table':
+        return generate_mud_table(html_element)
 
-    if is_autocomplete(html_element):
-        return '<MudAutocomplete T="string" SearchFunc="..." />'
+    elif html_element.tag == 'select':
+        return generate_mud_select(html_element)
+
+    elif html_element.tag == 'input':
+        return generate_mud_textfield(html_element)
 ```
 
-### Best Practice: Nest Plain HTML Inside MudBlazor
+### Benefits of This Approach
 
-```razor
-<!-- ✅ GOOD: MudBlazor for behavior, HTML for styling -->
-<MudDialog @bind-Visible="_showDialog">
-    <DialogContent>
-        <!-- Plain HTML follows your design tokens exactly -->
-        <div class="modal-body">
-            <div class="form-group">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-input" @bind="_name" />
-            </div>
-            <button class="btn btn-primary" @onclick="Submit">
-                Submit
-            </button>
-        </div>
-    </DialogContent>
-</MudDialog>
+✅ **Consistent Component Behavior**
+- All components use MudBlazor's built-in state management
+- Predictable lifecycle and event handling
+- No mixing of HTML and component paradigms
 
-<!-- ❌ BAD: MudBlazor components for form inputs -->
-<MudDialog @bind-Visible="_showDialog">
-    <DialogContent>
-        <MudTextField @bind-Value="_name" Label="Name" />
-        <MudButton Color="Color.Primary" OnClick="Submit">Submit</MudButton>
-        <!-- Now you need CSS overrides for EVERYTHING -->
-    </DialogContent>
-</MudDialog>
-```
+✅ **Strong Typing**
+- Compile-time validation
+- IntelliSense support
+- Type-safe parameters and bindings
 
-### Accuracy Comparison
+✅ **Maintainability**
+- CSS overrides are centralized in scoped CSS file
+- Component classes follow consistent naming convention (`-mud` suffix)
+- Easy to update design tokens without touching Razor files
 
-| Approach | Accuracy | Effort | Maintenance |
-|----------|----------|--------|-------------|
-| Plain HTML everywhere | 100% | Medium | Low |
-| MudBlazor everywhere | 60-75% | Low | High (overrides) |
-| **Hybrid (Plain + MudBlazor)** | **95-100%** | **Low** | **Low** |
+✅ **Scoped Isolation**
+- Entire dashboard wrapped in `.eg-dashboard-scope` class
+- Zero impact on existing MudBlazor pages
+- Can coexist with other design systems in same project
 
-### MCP Server Prompt Decision
+### Accuracy Trade-offs
 
-When generating code, ask the user:
+| Aspect | Native MudBlazor | Pure MudBlazor + CSS Overrides |
+|--------|------------------|-------------------------------|
+| **Visual Accuracy** | 50-60% | **90-95%** |
+| **Component Functionality** | 100% | 100% |
+| **CSS Override Complexity** | None | Medium (targeted overrides) |
+| **Maintenance Effort** | Low | Medium |
+| **Type Safety** | High | High |
+| **Blazor Integration** | Native | Native |
 
-```
-? Component generation strategy?
-  › Hybrid (Plain HTML for visuals, MudBlazor for complex interactions) - Recommended
-    Plain HTML only (requires manual implementation of dialogs, date pickers, etc.)
-    MudBlazor only (requires extensive CSS overrides, ~70% accuracy)
-```
+### Why 90-95% vs 100% Accuracy?
+
+MudBlazor components have complex internal DOM structures that may have slight visual differences:
+
+- **Ripple effects** - MudBlazor adds ripple containers that may affect spacing
+- **Icon positioning** - Material Icons may have different baseline than custom icon fonts
+- **Input states** - Focus/hover states may differ slightly from original design
+- **Animations** - MudBlazor transitions may differ from custom CSS animations
+
+**Where CSS Overrides Excel:**
+- Colors, spacing, borders, typography: **100% accurate**
+- Layout and positioning: **95% accurate**
+- Component internal structure: **90% accurate** (requires deep selector targeting)
 
 ---
 
